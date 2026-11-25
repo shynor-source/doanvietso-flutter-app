@@ -1310,6 +1310,11 @@ class AppState extends ChangeNotifier {
     for (final p in socialPosts) {
       if (p.id == postId) {
         p.comments.add(Comment(id: 'cmt-${DateTime.now().millisecondsSinceEpoch}', authorName: authorName, text: text.trim(), time: 'Vừa xong'));
+        // Ghi bình luận xuống máy chủ (nếu bài đã đồng bộ từ server)
+        final pid = _backendIdOf(postId);
+        if (pid != null && backendLive) {
+          _apiFire(api.post('/social/posts/$pid/comment', {'content': text.trim()}));
+        }
       }
     }
     notifyListeners();
