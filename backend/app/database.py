@@ -31,7 +31,7 @@ def migrate_db():
         # replace() tự no-op nếu không còn chữ cũ — chạy mỗi lần khởi động đều vô hại.
         for tbl, cols in (
             ("activity", ["title", "location", "organizer"]),
-            ("branch", ["ward"]),
+            ("branch", ["ward", "name"]),
             ("member", ["workplace"]),
             ("post", ["content"]),
             ("session", ["location"]),
