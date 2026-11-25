@@ -15,6 +15,24 @@ engine = create_engine(
 )
 
 
+def fix_postgres_sequences():
+    """Sau khi seed chèn bản ghi với id tường minh, sequence tự tăng của PostgreSQL
+    không được đẩy lên → insert mới sẽ trùng khóa. Căn chỉnh lại toàn bộ."""
+    from sqlalchemy import text
+    if engine.dialect.name != "postgresql":
+        return
+    with engine.begin() as conn:
+        for table in SQLModel.metadata.tables.values():
+            cols = [c.name for c in table.primary_key.columns]
+            if cols != ["id"]:
+                continue
+            name = f'"{table.name}"'
+            conn.execute(text(
+                "SELECT setval(pg_get_serial_sequence(:t, 'id'), "
+                f"COALESCE((SELECT MAX(id) FROM {name}), 0) + 1, false)"
+            ), {"t": name})
+
+
 def get_session():
     with Session(engine) as session:
         yield session
