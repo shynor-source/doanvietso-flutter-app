@@ -184,7 +184,7 @@ class _AppShellState extends State<AppShell> {
     switch (activeScreen) {
       case screenHome:
         if (currentRole == AppRole.member) {
-          return (title: 'Trang chủ Đoàn viên', subtitle: 'Chi đoàn Khu phố 5 • Tỉnh Đồng Nai', showBack: false);
+          return (title: 'Trang chủ Đoàn viên', subtitle: 'Chi đoàn Khu phố 5 • Thành phố Đồng Nai', showBack: false);
         }
         return (title: 'Chi đoàn Khu phố 5', subtitle: 'Quản lý Đoàn vụ • Phường Trấn Biên', showBack: false);
       case screenCreateQr:
@@ -217,7 +217,7 @@ class _AppShellState extends State<AppShell> {
       case screenMenu:
         return (title: 'Menu Tiện ích', subtitle: 'Toàn bộ tính năng & dịch vụ số', showBack: false);
       default:
-        return (title: 'Đoàn Viên Số', subtitle: 'Tỉnh Đồng Nai', showBack: false);
+        return (title: 'Đoàn Viên Số', subtitle: 'Thành phố Đồng Nai', showBack: false);
     }
   }
 

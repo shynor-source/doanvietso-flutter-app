@@ -1,4 +1,4 @@
-// Dữ liệu giả lập nền tảng Đoàn Viên Số - Tỉnh Đồng Nai (mock Round 1)
+// Dữ liệu giả lập nền tảng Đoàn Viên Số - Thành phố Đồng Nai (mock Round 1)
 
 class Member {
   final String id;
@@ -306,7 +306,7 @@ class RewardVoucher {
 
 // ===== Dữ liệu chi đoàn KP5 =====
 const branchDataName = 'Chi đoàn Khu phố 5';
-const branchDataWard = 'Phường Trấn Biên, TP. Đồng Nai, Tỉnh Đồng Nai';
+const branchDataWard = 'Phường Trấn Biên, TP. Đồng Nai';
 const branchSecretaryName = 'Nguyễn Văn An';
 const branchSecretaryPhone = '0912.345.678';
 
@@ -457,7 +457,7 @@ const wardDataName = 'Đoàn Thanh niên Phường Trấn Biên';
 final makeupSessions = [
   MakeupSession(id: 'mk-01', branchName: 'Chi đoàn Khối Doanh nghiệp KCN Amata', title: 'Sinh hoạt bù Chuyên đề: Kỹ năng an toàn lao động & Quyền lợi công đoàn', time: '09:00 - Chủ Nhật, 29/11/2026', format: 'Trực tiếp tại Nhà sinh hoạt Công nhân KCN Amata', seatsLeft: 8, suitableFor: 'Công nhân làm ca 2, ca đêm'),
   MakeupSession(id: 'mk-02', branchName: 'Chi đoàn Khu phố 2 (Liên kết)', title: 'Sinh hoạt ghép: Chuyển đổi số trong sinh hoạt Đoàn thanh niên', time: '19:30 - Thứ Hai, 30/11/2026', format: 'Trực tiếp tại Nhà văn hóa KP2', seatsLeft: 12, suitableFor: 'Công nhân làm ca 1'),
-  MakeupSession(id: 'mk-03', branchName: 'Tỉnh Đoàn Đồng Nai (Trực tuyến)', title: 'E-Learning: Học tập Chuyên đề Kỹ năng số & Chuyển đổi số Đồng Nai', time: 'Linh hoạt (Hoàn thành bài trắc nghiệm 3 câu)', format: 'Trực tuyến 100% trên App (Tự động cấp chứng nhận)', seatsLeft: 999, suitableFor: 'Tất cả đoàn viên làm ca kíp khó sắp xếp thời gian'),
+  MakeupSession(id: 'mk-03', branchName: 'Thành Đoàn Đồng Nai (Trực tuyến)', title: 'E-Learning: Học tập Chuyên đề Kỹ năng số & Chuyển đổi số Đồng Nai', time: 'Linh hoạt (Hoàn thành bài trắc nghiệm 3 câu)', format: 'Trực tuyến 100% trên App (Tự động cấp chứng nhận)', seatsLeft: 999, suitableFor: 'Tất cả đoàn viên làm ca kíp khó sắp xếp thời gian'),
 ];
 
 final initialMakeupRequests = [
@@ -467,16 +467,16 @@ final initialMakeupRequests = [
 ];
 
 final quizQuestions = [
-  QuizQuestion(id: 1, question: 'Nghị quyết Chuyển đổi số tỉnh Đồng Nai xác định lực lượng nào giữ vai trò tiên phong nòng cốt trong các Tổ công nghệ số cộng đồng?', options: ['A. Lực lượng Đoàn viên, Thanh niên Đồng Nai', 'B. Các doanh nghiệp cung cấp viễn thông', 'C. Hội Phụ nữ và Hội Nông dân cơ sở', 'D. Bộ phận Tiếp nhận và Trả kết quả một cửa'], correctAnswer: 0),
+  QuizQuestion(id: 1, question: 'Nghị quyết Chuyển đổi số thành phố Đồng Nai xác định lực lượng nào giữ vai trò tiên phong nòng cốt trong các Tổ công nghệ số cộng đồng?', options: ['A. Lực lượng Đoàn viên, Thanh niên Đồng Nai', 'B. Các doanh nghiệp cung cấp viễn thông', 'C. Hội Phụ nữ và Hội Nông dân cơ sở', 'D. Bộ phận Tiếp nhận và Trả kết quả một cửa'], correctAnswer: 0),
   QuizQuestion(id: 2, question: 'Theo hướng dẫn đổi mới sinh hoạt Đoàn cho công nhân làm ca tại các KCN Đồng Nai, giải pháp nào được áp dụng khi đoàn viên trùng ca sản xuất?', options: ['A. Xóa tên khỏi danh sách Đoàn viên sau 2 kỳ', 'B. Đăng ký sinh hoạt bù liên chi đoàn hoặc học chuyên đề E-Learning', 'C. Buộc phải xin nghỉ việc không lương để đi họp', 'D. Nhờ người khác đi họp và điểm danh hộ'], correctAnswer: 1),
   QuizQuestion(id: 3, question: 'Ứng dụng "Đoàn Viên Số Đồng Nai" sử dụng cơ chế bảo mật nào để chống gian lận điểm danh?', options: ['A. Chụp ảnh thẻ đoàn viên giấy gửi vào nhóm chat', 'B. Ký tên thủ công trên sổ tay bí thư', 'C. Mã QR động thay đổi theo thời gian thực kết hợp định vị GPS Geofencing', 'D. Điểm danh qua danh sách gọi tên miệng'], correctAnswer: 2),
 ];
 
 final rewardItems = [
   RewardItem(id: 'rw-1', title: 'Voucher Xăng Petrolimex 50.000đ', points: 30, category: 'Hỗ trợ đi lại công nhân KCN', sponsor: 'Công đoàn Các KCN Đồng Nai', icon: 'fuel', badge: 'Phổ biến', available: 45),
-  RewardItem(id: 'rw-2', title: 'Vé xem phim Lotte Cinema Vincom Biên Hòa', points: 40, category: 'Văn hóa giải trí thanh niên', sponsor: 'Tỉnh Đoàn Đồng Nai', icon: 'film', available: 20),
-  RewardItem(id: 'rw-3', title: 'Áo thun Thanh niên Đồng Nai 2026', points: 50, category: 'Đồng phục thanh niên số', sponsor: 'Tỉnh Đoàn Đồng Nai', icon: 'shirt', available: 15),
-  RewardItem(id: 'rw-4', title: 'Vé Xe Tết Sum Vầy Về Quê Đón Tết', points: 80, category: 'Chương trình Tết công nhân KCN', sponsor: 'Liên đoàn Lao động Tỉnh Đồng Nai', icon: 'bus', badge: 'Ý nghĩa Tết', available: 10),
+  RewardItem(id: 'rw-2', title: 'Vé xem phim Lotte Cinema Vincom Biên Hòa', points: 40, category: 'Văn hóa giải trí thanh niên', sponsor: 'Thành Đoàn Đồng Nai', icon: 'film', available: 20),
+  RewardItem(id: 'rw-3', title: 'Áo thun Thanh niên Đồng Nai 2026', points: 50, category: 'Đồng phục thanh niên số', sponsor: 'Thành Đoàn Đồng Nai', icon: 'shirt', available: 15),
+  RewardItem(id: 'rw-4', title: 'Vé Xe Tết Sum Vầy Về Quê Đón Tết', points: 80, category: 'Chương trình Tết công nhân KCN', sponsor: 'Liên đoàn Lao động Thành phố Đồng Nai', icon: 'bus', badge: 'Ý nghĩa Tết', available: 10),
 ];
 
 final volunteerActivities = [
@@ -523,14 +523,14 @@ final scheduleWeekDays = [
 
 final initialMySchedule = [
   ScheduleItem(id: 'sch-01', title: 'Sinh hoạt Chi đoàn tháng 12: Thanh niên tiên phong Số hóa', category: 'Sinh hoạt', dateStr: '28/11/2026', dayOfWeek: 'T7', timeSlot: '19:30 - 21:00', room: 'Nhà văn hóa Khu phố 5', organizer: 'BCH Chi đoàn Khu phố 5', format: 'Trực tiếp • Điểm danh QR', points: '+10 điểm', mandatory: true, isELearning: false),
-  ScheduleItem(id: 'sch-02', title: 'Chuyên đề: Kỹ năng số & An toàn không gian mạng', category: 'Chuyên đề', dateStr: '26/11/2026', dayOfWeek: 'T5', timeSlot: '20:00 - 21:00', room: 'Trực tuyến trên ứng dụng', organizer: 'Tỉnh Đoàn Đồng Nai', format: 'Trực tuyến E-Learning', points: '+10 điểm', isELearning: true),
+  ScheduleItem(id: 'sch-02', title: 'Chuyên đề: Kỹ năng số & An toàn không gian mạng', category: 'Chuyên đề', dateStr: '26/11/2026', dayOfWeek: 'T5', timeSlot: '20:00 - 21:00', room: 'Trực tuyến trên ứng dụng', organizer: 'Thành Đoàn Đồng Nai', format: 'Trực tuyến E-Learning', points: '+10 điểm', isELearning: true),
 ];
 
 final scheduleCatalog = [
   ScheduleItem(id: 'cat-01', title: 'Tọa đàm Thanh niên với Chuyển đổi số & Dịch vụ công', category: 'Chuyên đề', dateStr: '27/11/2026', dayOfWeek: 'T6', timeSlot: '19:00 - 20:30', room: 'Hội trường UBND Phường Trấn Biên', organizer: 'Đoàn Phường Trấn Biên', format: 'Trực tiếp • Kết hợp Livestream', points: '+15 điểm', seatsLeft: 18, isELearning: false),
   ScheduleItem(id: 'cat-02', title: 'Đội hình Xung kích Hỗ trợ cài đặt VNeID & Chữ ký số', category: 'Tình nguyện', dateStr: '25/11/2026', dayOfWeek: 'T4', timeSlot: '08:00 - 11:00', room: 'Bộ phận Một cửa P. Trấn Biên', organizer: 'Đoàn Phường Trấn Biên', format: 'Trực tiếp', points: '+20 điểm', seatsLeft: 12, isELearning: false),
-  ScheduleItem(id: 'cat-03', title: 'Tập huấn: Nghiệp vụ Đoàn viên & Quản lý Hồ sơ số', category: 'Chuyên đề', dateStr: '30/11/2026', dayOfWeek: 'T2', timeSlot: '19:30 - 20:45', room: 'Trực tuyến trên ứng dụng', organizer: 'Ban Tuyên giáo Tỉnh Đoàn', format: 'Trực tuyến • Có trắc nghiệm', points: '+15 điểm', seatsLeft: 999, isELearning: true),
-  ScheduleItem(id: 'cat-04', title: 'Sinh hoạt Liên Chi đoàn Quý IV & Giao lưu Thanh niên', category: 'Sinh hoạt', dateStr: '30/11/2026', dayOfWeek: 'T2', timeSlot: '18:00 - 19:30', room: 'Trung tâm Văn hóa Thanh thiếu nhi', organizer: 'Tỉnh Đoàn Đồng Nai', format: 'Trực tiếp', points: '+10 điểm', seatsLeft: 25, isELearning: false),
+  ScheduleItem(id: 'cat-03', title: 'Tập huấn: Nghiệp vụ Đoàn viên & Quản lý Hồ sơ số', category: 'Chuyên đề', dateStr: '30/11/2026', dayOfWeek: 'T2', timeSlot: '19:30 - 20:45', room: 'Trực tuyến trên ứng dụng', organizer: 'Ban Tuyên giáo Thành Đoàn', format: 'Trực tuyến • Có trắc nghiệm', points: '+15 điểm', seatsLeft: 999, isELearning: true),
+  ScheduleItem(id: 'cat-04', title: 'Sinh hoạt Liên Chi đoàn Quý IV & Giao lưu Thanh niên', category: 'Sinh hoạt', dateStr: '30/11/2026', dayOfWeek: 'T2', timeSlot: '18:00 - 19:30', room: 'Trung tâm Văn hóa Thanh thiếu nhi', organizer: 'Thành Đoàn Đồng Nai', format: 'Trực tiếp', points: '+10 điểm', seatsLeft: 25, isELearning: false),
 ];
 
 final initialSocialPosts = [

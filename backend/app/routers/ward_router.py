@@ -103,7 +103,7 @@ def export_report(user: User = Depends(get_current_user), db: DBSession = Depend
     reports = db.exec(select(WardReport)).all()
     rep = {r.branch_id: r for r in reports}
     lines = [
-        "ĐOÀN TNCS HỒ CHÍ MINH", "PHƯỜNG TRẤN BIÊN", "Số: 18-BC/ĐTN", "",
+        "ĐOÀN TNCS HỒ CHÍ MINH", "PHƯỜNG TRẤN BIÊN — THÀNH PHỐ ĐỒNG NAI", "Số: 18-BC/ĐTN", "",
         "Trấn Biên, ngày 28 tháng 11 năm 2026", "",
         "BÁO CÁO TÌNH HÌNH SINH HOẠT CHI ĐOÀN — THÁNG 11/2026", "",
     ]
@@ -111,7 +111,7 @@ def export_report(user: User = Depends(get_current_user), db: DBSession = Depend
         r = rep.get(b.id)
         if r:
             lines.append(f"{i}. {b.name}: {r.attended}/{r.total} ĐV ({r.attended / r.total * 100:.1f}%) — {r.status}")
-    lines += ["", "BI THƯ ĐOÀN PHƯỜNG", "", "(Đã ký)", "Phan Thị Bích Thảo"]
+    lines += ["", "CÁN BỘ ĐOÀN PHƯỜNG", "", "(Đã ký)", "Phan Thị Bích Thảo"]
     return {"month": "11/2026", "content": "\n".join(lines)}
 
 

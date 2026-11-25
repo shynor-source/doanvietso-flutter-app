@@ -120,7 +120,7 @@ class _WardDashboardState extends State<WardDashboard> {
                     ),
                     const Divider(height: 20),
                     Text('BÁO CÁO CÔNG TÁC ĐOÀN ${data.monthLabel.toUpperCase()}', textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
-                    Text('Kính gửi: Ban Thường vụ Tỉnh Đoàn Đồng Nai', style: const TextStyle(fontSize: 11, color: D.textMuted)),
+                    Text('Kính gửi: Ban Thường vụ Thành Đoàn Đồng Nai', style: const TextStyle(fontSize: 11, color: D.textMuted)),
                     const SizedBox(height: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,7 +150,7 @@ class _WardDashboardState extends State<WardDashboard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('Nơi nhận:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: D.textMuted)),
-                            const Text('- Trân trọng, BAN THƯỜNG VỤ TỈNH ĐOÀN;', style: TextStyle(fontSize: 11, color: D.textMuted)),
+                            const Text('- Trân trọng, BAN THƯỜNG VỤ THÀNH ĐOÀN;', style: TextStyle(fontSize: 11, color: D.textMuted)),
                             const Text('- Lưu: VP.', style: TextStyle(fontSize: 11, color: D.textMuted)),
                           ],
                         ),

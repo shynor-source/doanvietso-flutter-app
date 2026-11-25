@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Pill('Đoàn TNCS Hồ Chí Minh Tỉnh Đồng Nai', fontSize: 11),
+                const Pill('Đoàn TNCS Hồ Chí Minh Thành phố Đồng Nai', fontSize: 11),
                 const SizedBox(height: 6),
                 const Text('Đoàn Viên Số', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF0F172A))),
                 const Text('Quản lý chi đoàn & kết nối thanh niên công nhân KCN', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, color: D.textMuted)),

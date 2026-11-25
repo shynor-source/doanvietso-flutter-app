@@ -1007,7 +1007,7 @@ class _MakeupSessionScreenState extends State<MakeupSessionScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Center(child: Text('TỈNH ĐOÀN ĐỒNG NAI', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: D.primary))),
+                              const Center(child: Text('THÀNH ĐOÀN ĐỒNG NAI', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: D.primary))),
                               const Center(child: Text('CHỨNG NHẬN HOÀN THÀNH CHUYÊN ĐỀ', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)))),
                               const Divider(height: 18),
                               Text.rich(TextSpan(style: const TextStyle(fontSize: 12, color: Color(0xFF334155)), children: [
