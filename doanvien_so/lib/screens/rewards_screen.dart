@@ -22,7 +22,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
   // Tạo hoạt động mới
   final actTitleCtrl = TextEditingController();
   final actDateCtrl = TextEditingController(text: '19/12/2026 (07:30 - 11:00)');
-  final actLocationCtrl = TextEditingController(text: 'Khu phố 5 - Phường Tam Hiệp');
+  final actLocationCtrl = TextEditingController(text: 'Khu phố 5 - Phường Trấn Biên');
 
   @override
   void dispose() {

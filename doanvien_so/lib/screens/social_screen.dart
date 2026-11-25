@@ -25,7 +25,7 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
   String? openCommentPostId = 'post-event-1';
   Map<String, TextEditingController> commentCtrls = {};
 
-  String eventTitle = 'Ngày hội Thanh niên Chuyển đổi số Tam Hiệp';
+  String eventTitle = 'Ngày hội Thanh niên Chuyển đổi số Trấn Biên';
   String eventDateStr = '29/11/2026';
   final eventTimeCtrl = TextEditingController(text: '08:00 - 11:00');
   final eventRoomCtrl = TextEditingController(text: 'Nhà văn hóa Khu phố 5');
@@ -65,7 +65,7 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
     final state = widget.state;
     return switch (widget.currentRole) {
       AppRole.secretary => (name: 'Nguyễn Văn An', role: 'Bí thư Chi đoàn Khu phố 5'),
-      AppRole.wardOfficer => (name: state.backendUserName ?? 'Phan Thị Bích Thảo', role: 'Cán bộ Đoàn Phường Tam Hiệp'),
+      AppRole.wardOfficer => (name: state.backendUserName ?? 'Phan Thị Bích Thảo', role: 'Cán bộ Đoàn Phường Trấn Biên'),
       AppRole.member => (name: state.currentMember.name, role: 'Đoàn viên • ${state.currentMember.branchName}'),
     };
   }

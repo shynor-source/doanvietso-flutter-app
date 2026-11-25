@@ -44,7 +44,7 @@ class _SecretaryReportViewState extends State<SecretaryReportView> {
                       child: Text('Báo cáo nội bộ Chi đoàn', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white.withValues(alpha: 0.95))),
                     ),
                     const SizedBox(height: 8),
-                    const Text('Chi đoàn Khu phố 5 — P. Tam Hiệp', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
+                    const Text('Chi đoàn Khu phố 5 — P. Trấn Biên', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
                     Text('Tổng hợp số liệu tháng 11/2026 nộp BCH Đoàn Phường', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
                     const SizedBox(height: 14),
                     Container(
@@ -151,7 +151,7 @@ class _SecretaryReportViewState extends State<SecretaryReportView> {
                           ? null
                           : () {
                               state.submitBranchReportToWard();
-                              state.showToast('Đã gửi báo cáo số hóa Chi đoàn KP5 lên Đoàn Phường Tam Hiệp!');
+                              state.showToast('Đã gửi báo cáo số hóa Chi đoàn KP5 lên Đoàn Phường Trấn Biên!');
                             },
                     ),
                     const SizedBox(height: 10),
@@ -240,7 +240,7 @@ class _SecretaryReportViewState extends State<SecretaryReportView> {
                       decoration: BoxDecoration(color: D.grayBg, borderRadius: BorderRadius.circular(16), border: Border.all(color: D.border)),
                       child: Column(
                         children: [
-                          const Center(child: Text('ĐOÀN TNCS HỒ CHÍ MINH PHƯỜNG TAM HIỆP', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF334155)))),
+                          const Center(child: Text('ĐOÀN TNCS HỒ CHÍ MINH PHƯỜNG TRẤN BIÊN', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF334155)))),
                           const Center(child: Text('BCH CHI ĐOÀN KHU PHỐ 5', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: D.primary))),
                           const Divider(height: 18),
                           const Center(child: Text('BÁO CÁO SINH HOẠT THÁNG 11/2026', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800))),

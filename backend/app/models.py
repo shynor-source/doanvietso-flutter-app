@@ -1,7 +1,7 @@
 """SQLModel — mô hình dữ liệu Đoàn Viên Số (Vòng 2).
 
 Thiết kế bám 1:1 mock data của app Flutter (mock_data.dart):
-Chi đoàn Khu phố 5 — P. Tam Hiệp, 46 đoàn viên, 12 chi đoàn phường.
+Chi đoàn Khu phố 5 — P. Trấn Biên, 46 đoàn viên, 12 chi đoàn phường.
 """
 from datetime import datetime, timezone
 from typing import Optional
@@ -25,7 +25,7 @@ class User(SQLModel, table=True):
 class Branch(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str  # "Chi đoàn Khu phố 5"
-    ward: str = "Phường Tam Hiệp"
+    ward: str = "Phường Trấn Biên"
     secretary_name: str = ""
     type: str = "Khu dân cư"  # Khu dân cư | Trường học | Doanh nghiệp KCN ...
     total_members: int = 0
@@ -118,7 +118,7 @@ class Activity(SQLModel, table=True):
     starts_at: datetime
     location: str = ""
     points: int = 15
-    organizer: str = ""  # "Đoàn Phường Tam Hiệp" | "BCH Chi đoàn KP5"
+    organizer: str = ""  # "Đoàn Phường Trấn Biên" | "BCH Chi đoàn KP5"
     launched_by: int = Field(foreign_key="user.id")
     created_at: datetime = Field(default_factory=utcnow)
 

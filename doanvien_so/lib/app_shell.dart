@@ -186,7 +186,7 @@ class _AppShellState extends State<AppShell> {
         if (currentRole == AppRole.member) {
           return (title: 'Trang chủ Đoàn viên', subtitle: 'Chi đoàn Khu phố 5 • Tỉnh Đồng Nai', showBack: false);
         }
-        return (title: 'Chi đoàn Khu phố 5', subtitle: 'Quản lý Đoàn vụ • Phường Tam Hiệp', showBack: false);
+        return (title: 'Chi đoàn Khu phố 5', subtitle: 'Quản lý Đoàn vụ • Phường Trấn Biên', showBack: false);
       case screenCreateQr:
         return (title: 'Sinh hoạt & Mã QR', subtitle: 'Xác thực 2 lớp • QR động', showBack: true);
       case screenScanQr:
@@ -201,9 +201,9 @@ class _AppShellState extends State<AppShell> {
         return (title: 'Báo cáo Chi đoàn KP5', subtitle: 'Tổng hợp số liệu định kỳ', showBack: true);
       case screenWardDash:
         final wd = AppStateScope.of(context, listen: false);
-        return (title: 'Đoàn Phường Tam Hiệp', subtitle: '${wd.wardDataByMonth['11']!.totalBranches} chi đoàn • ${wd.wardDataByMonth['11']!.totalMembers} đoàn viên', showBack: false);
+        return (title: 'Đoàn Phường Trấn Biên', subtitle: '${wd.wardDataByMonth['11']!.totalBranches} chi đoàn • ${wd.wardDataByMonth['11']!.totalMembers} đoàn viên', showBack: false);
       case screenWardBranches:
-        return (title: 'Quản lý ${AppStateScope.of(context, listen: false).wardDataByMonth['11']!.totalBranches} Chi đoàn', subtitle: 'Đoàn Phường Tam Hiệp', showBack: true);
+        return (title: 'Quản lý ${AppStateScope.of(context, listen: false).wardDataByMonth['11']!.totalBranches} Chi đoàn', subtitle: 'Đoàn Phường Trấn Biên', showBack: true);
       case screenWardReports:
         return (title: 'Báo cáo Đoàn vụ', subtitle: 'Thống kê & Xuất văn bản tự động', showBack: true);
       case screenWardRewards:

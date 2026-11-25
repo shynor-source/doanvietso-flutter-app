@@ -16,7 +16,7 @@ Future<void> showRoleSwitcherSheet(
   final roles = [
     (id: AppRole.secretary, name: 'Bí thư Chi đoàn cơ sở', desc: 'Nguyễn Văn An • Chi đoàn KP5', icon: Icons.manage_accounts_rounded),
     (id: AppRole.member, name: 'Đoàn viên Thanh niên', desc: 'Trần Minh Quân • Chi đoàn KP5', icon: Icons.person_rounded),
-    (id: AppRole.wardOfficer, name: 'Cán bộ Đoàn Xã / Phường', desc: 'Phan Thị Bích Thảo • P. Tam Hiệp', icon: Icons.location_city_rounded),
+    (id: AppRole.wardOfficer, name: 'Cán bộ Đoàn Xã / Phường', desc: 'Phan Thị Bích Thảo • P. Trấn Biên', icon: Icons.location_city_rounded),
   ];
   final isWardScreen = [screenWardDashS, screenWardBranchesS, screenWardReportsS, screenWardRewardsS].contains(activeScreen) ||
       (activeScreen == screenHomeS && currentRole == AppRole.wardOfficer);
@@ -309,7 +309,7 @@ class _NotificationSheetState extends State<_NotificationSheet> {
                         DropdownMenuItem(value: 'Nhóm công nhân làm xa KCN', child: Text('Nhóm công nhân làm xa / KCN (12 ĐV)', style: TextStyle(fontSize: 13))),
                         DropdownMenuItem(value: 'Toàn Chi đoàn Khu phố 5', child: Text('Toàn thể Chi đoàn Khu phố 5 (46 ĐV)', style: TextStyle(fontSize: 13))),
                         DropdownMenuItem(value: 'Nhóm đoàn viên tại địa phương', child: Text('Nhóm đoàn viên tại địa phương (31 ĐV)', style: TextStyle(fontSize: 13))),
-                        DropdownMenuItem(value: '12 Bí thư Chi đoàn Phường Tam Hiệp', child: Text('12 Bí thư Chi đoàn trực thuộc Phường', style: TextStyle(fontSize: 13))),
+                        DropdownMenuItem(value: '12 Bí thư Chi đoàn Phường Trấn Biên', child: Text('12 Bí thư Chi đoàn trực thuộc Phường', style: TextStyle(fontSize: 13))),
                       ],
                       onChanged: (v) => composeTarget.value = v!,
                     ),
@@ -410,8 +410,8 @@ class _SystemAdminSheetState extends State<_SystemAdminSheet> {
     final state = widget.state;
     final member = state.currentMember;
     final Map<String, String> profile = switch (widget.role) {
-      AppRole.secretary => {'name': state.backendUserName ?? 'Nguyễn Văn An', 'code': 'CB-KP5-2026', 'roleName': 'Bí thư Chi đoàn Khu phố 5', 'unit': 'Phường Tam Hiệp, TP. Biên Hòa, Tỉnh Đồng Nai', 'phone': '0912.345.678', 'joinDate': '26/03/2017'},
-      AppRole.wardOfficer => {'name': state.backendUserName ?? 'Phan Thị Bích Thảo', 'code': 'CB-PHUONG-01', 'roleName': 'Cán bộ Đoàn Phường Tam Hiệp', 'unit': 'BCH Đoàn Phường Tam Hiệp (12 Chi đoàn)', 'phone': '0908.123.999', 'joinDate': '26/03/2015'},
+      AppRole.secretary => {'name': state.backendUserName ?? 'Nguyễn Văn An', 'code': 'CB-KP5-2026', 'roleName': 'Bí thư Chi đoàn Khu phố 5', 'unit': 'Phường Trấn Biên, TP. Đồng Nai, Tỉnh Đồng Nai', 'phone': '0912.345.678', 'joinDate': '26/03/2017'},
+      AppRole.wardOfficer => {'name': state.backendUserName ?? 'Phan Thị Bích Thảo', 'code': 'CB-PHUONG-01', 'roleName': 'Cán bộ Đoàn Phường Trấn Biên', 'unit': 'BCH Đoàn Phường Trấn Biên (12 Chi đoàn)', 'phone': '0908.123.999', 'joinDate': '26/03/2015'},
       AppRole.member => {'name': member.name, 'code': member.memberCode, 'roleName': 'Đoàn viên • Công nhân KCN', 'unit': '${member.branchName} • ${member.workplace}', 'phone': member.phone, 'joinDate': member.joinDate},
     };
     final branches = state.wardDataByMonth['11']!.branchesRank;

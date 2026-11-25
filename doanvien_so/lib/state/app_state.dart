@@ -530,7 +530,7 @@ class AppState extends ChangeNotifier {
       }
     }
     if (branch == null) return;
-    notifications['secretary']!.insert(0, AppNotification(id: 'noti-rem-${DateTime.now().millisecondsSinceEpoch}', title: 'Đoàn Phường nhắc báo cáo ${monthData.monthLabel}', content: 'BCH Đoàn Phường Tam Hiệp đề nghị ${branch.name} hoàn tất gửi số liệu sinh hoạt tháng.', time: 'Vừa xong', type: 'report', unread: true));
+    notifications['secretary']!.insert(0, AppNotification(id: 'noti-rem-${DateTime.now().millisecondsSinceEpoch}', title: 'Đoàn Phường nhắc báo cáo ${monthData.monthLabel}', content: 'BCH Đoàn Phường Trấn Biên đề nghị ${branch.name} hoàn tất gửi số liệu sinh hoạt tháng.', time: 'Vừa xong', type: 'report', unread: true));
     notifyListeners();
   }
 
@@ -543,7 +543,7 @@ class AppState extends ChangeNotifier {
     for (final b in month11.branchesRank) {
       if (b.id == 'kp5') b.status = 'submitted';
     }
-    notifications['ward_officer']!.insert(0, AppNotification(id: 'noti-sub-${DateTime.now().millisecondsSinceEpoch}', title: 'Chi đoàn KP5 đã gửi báo cáo số hóa', content: 'Bí thư Nguyễn Văn An đã chốt số liệu sinh hoạt KP5 (46 ĐV) gửi Đoàn Phường Tam Hiệp.', time: 'Vừa xong', type: 'report', unread: true));
+    notifications['ward_officer']!.insert(0, AppNotification(id: 'noti-sub-${DateTime.now().millisecondsSinceEpoch}', title: 'Chi đoàn KP5 đã gửi báo cáo số hóa', content: 'Bí thư Nguyễn Văn An đã chốt số liệu sinh hoạt KP5 (46 ĐV) gửi Đoàn Phường Trấn Biên.', time: 'Vừa xong', type: 'report', unread: true));
     notifyListeners();
   }
 
@@ -640,7 +640,7 @@ class AppState extends ChangeNotifier {
         name: accountData['name']!,
         phone: accountData['phone']!,
         type: accountData['type'] ?? 'local',
-        workplace: accountData['workplace'] ?? 'Phường Tam Hiệp, TP. Biên Hòa',
+        workplace: accountData['workplace'] ?? 'Phường Trấn Biên, TP. Đồng Nai',
         shift: accountData['shift'] ?? 'Hành chính',
         lastAttended: '24/11/2026',
         points: 80,
@@ -664,7 +664,7 @@ class AppState extends ChangeNotifier {
       name: input['name'],
       phone: input['phone'] ?? '',
       type: input['type'] ?? 'local',
-      workplace: input['workplace'] ?? 'Khu phố 5, Tam Hiệp',
+      workplace: input['workplace'] ?? 'Khu phố 5, Trấn Biên',
       shift: input['shift'] ?? 'Hành chính',
       lastAttended: 'Chưa tham gia',
       points: 75,
@@ -730,7 +730,7 @@ class AppState extends ChangeNotifier {
   }
 
   void submitTransferRequest({required String memberName, required String memberCode, required String direction, required String toBranch, required String reason, String? memberId, String? fromBranch}) {
-    transferRequests.insert(0, TransferRequest(id: 'tr-${DateTime.now().millisecondsSinceEpoch}', memberId: memberId ?? defaultCurrentMemberId, memberName: memberName, memberCode: memberCode, direction: direction, fromBranch: fromBranch ?? 'Chi đoàn Khu phố 5 - P. Tam Hiệp', toBranch: toBranch, reason: reason, submittedAt: '24/11/2026', status: 'pending', step: 1));
+    transferRequests.insert(0, TransferRequest(id: 'tr-${DateTime.now().millisecondsSinceEpoch}', memberId: memberId ?? defaultCurrentMemberId, memberName: memberName, memberCode: memberCode, direction: direction, fromBranch: fromBranch ?? 'Chi đoàn Khu phố 5 - P. Trấn Biên', toBranch: toBranch, reason: reason, submittedAt: '24/11/2026', status: 'pending', step: 1));
     notifications['secretary']!.insert(0, AppNotification(id: 'noti-tr-${DateTime.now().millisecondsSinceEpoch}', title: 'Hồ sơ chuyển sinh hoạt mới: $memberName', content: '→ $toBranch. Lý do: $reason', time: 'Vừa xong', type: 'report', unread: true));
     notifyListeners();
   }
@@ -754,7 +754,7 @@ class AppState extends ChangeNotifier {
       } else {
         final exists = members.any((m) => m.id == target.memberId);
         if (!exists) {
-          members.insert(0, Member(id: target.memberId, memberCode: target.memberCode, name: target.memberName, phone: '0933.778.901', type: 'local', workplace: 'Khu phố 5, Tam Hiệp (Chuyển đến)', shift: 'Ca 1 (06h - 14h)', lastAttended: '24/11/2026', points: 85, makeupCount: 0, status: 'active', occupation: 'Công nhân KCN Amata', joinDate: '26/03/2022', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: [const AttendanceRec('Tháng 11', 'present', 'Tiếp nhận chuyển đến')]));
+          members.insert(0, Member(id: target.memberId, memberCode: target.memberCode, name: target.memberName, phone: '0933.778.901', type: 'local', workplace: 'Khu phố 5, Trấn Biên (Chuyển đến)', shift: 'Ca 1 (06h - 14h)', lastAttended: '24/11/2026', points: 85, makeupCount: 0, status: 'active', occupation: 'Công nhân KCN Amata', joinDate: '26/03/2022', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: [const AttendanceRec('Tháng 11', 'present', 'Tiếp nhận chuyển đến')]));
         }
       }
     } else {
@@ -1066,7 +1066,7 @@ class AppState extends ChangeNotifier {
           dayOfWeek: 'CN',
           timeSlot: _fmtTime('${j['starts_at']}'),
           room: (j['location'] as String?) ?? '',
-          organizer: (j['organizer'] as String?) ?? 'Đoàn Phường Tam Hiệp',
+          organizer: (j['organizer'] as String?) ?? 'Đoàn Phường Trấn Biên',
           format: 'Trực tiếp • Điểm danh QR',
           points: '+${_intOf(j['points'])} điểm',
           isELearning: false,

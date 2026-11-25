@@ -26,6 +26,23 @@ def migrate_db():
                 conn.execute(text("ALTER TABLE post ADD COLUMN activity_id INTEGER"))
             except Exception:
                 pass  # cột đã tồn tại
+        # Đổi bối cảnh demo: Phường Tam Hiệp (TP. Biên Hòa cũ) → Phường Trấn Biên
+        # (thành phố Đồng Nai sau sáp nhập 01/7/2025 — NQ 1662/NQ-UBTVQH15).
+        # replace() tự no-op nếu không còn chữ cũ — chạy mỗi lần khởi động đều vô hại.
+        for tbl, cols in (
+            ("activity", ["title", "location", "organizer"]),
+            ("branch", ["ward"]),
+            ("member", ["workplace"]),
+            ("post", ["content"]),
+            ("session", ["location"]),
+        ):
+            for col in cols:
+                try:
+                    conn.execute(text(
+                        f'UPDATE {tbl} SET {col} = replace({col}, :old, :new)'
+                    ), {"old": "Tam Hiệp", "new": "Trấn Biên"})
+                except Exception:
+                    pass  # bảng/cột chưa tồn tại (DB trống) — bỏ qua
 
 
 def fix_postgres_sequences():

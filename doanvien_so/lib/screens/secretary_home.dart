@@ -42,7 +42,7 @@ class SecretaryHomeView extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           const Text('Nguyễn Văn An', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
-                          const Text('Bí thư Chi đoàn • P. Tam Hiệp, TP. Biên Hòa', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12, color: Colors.white)),
+                          const Text('Bí thư Chi đoàn • P. Trấn Biên, TP. Đồng Nai', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12, color: Colors.white)),
                         ],
                       ),
                     ),

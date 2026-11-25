@@ -306,7 +306,7 @@ class RewardVoucher {
 
 // ===== Dữ liệu chi đoàn KP5 =====
 const branchDataName = 'Chi đoàn Khu phố 5';
-const branchDataWard = 'Phường Tam Hiệp, TP. Biên Hòa, Tỉnh Đồng Nai';
+const branchDataWard = 'Phường Trấn Biên, TP. Đồng Nai, Tỉnh Đồng Nai';
 const branchSecretaryName = 'Nguyễn Văn An';
 const branchSecretaryPhone = '0912.345.678';
 
@@ -350,34 +350,34 @@ final mockMembers = <Member>[
   Member(id: 'dv-15', name: 'Võ Đình Trọng', phone: '0985.556.677', type: 'transferred', workplace: 'Nghĩa vụ Quân sự Đồng Nai', shift: 'Chiến sĩ', lastAttended: '15/02/2026', points: 100, makeupCount: 0, status: 'military', note: 'Nhập ngũ đợt 1/2026', memberCode: 'ĐV-DN-015', joinDate: '26/03/2020', occupation: 'Chiến sĩ', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9/2026', 'military', 'Nghĩa vụ quân sự'], ['Tháng 10/2026', 'military', 'Nghĩa vụ quân sự'], ['Tháng 11/2026', 'military', 'Nghĩa vụ quân sự']])),
   Member(id: 'dv-16', name: 'Nguyễn Văn An (Bí thư)', phone: '0912.345.678', type: 'local', workplace: 'Hộ kinh doanh KP5', shift: 'Tự do', lastAttended: '15/11/2026', points: 98, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-016', joinDate: '19/05/2021', occupation: 'Cán bộ / Viên chức', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-17', name: 'Trần Thị Mai', phone: '0901.123.456', type: 'local', workplace: 'Giáo viên Mầm non KP5', shift: 'Hành chính', lastAttended: '15/11/2026', points: 96, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-017', joinDate: '26/03/2022', occupation: 'Cán bộ / Viên chức', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-18', name: 'Lê Hoàng Nam', phone: '0902.234.567', type: 'local', workplace: 'UBND Phường Tam Hiệp', shift: 'Hành chính', lastAttended: '15/11/2026', points: 94, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-018', joinDate: '15/10/2023', occupation: 'Cán bộ / Viên chức', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-19', name: 'Phạm Hồng Nhung', phone: '0903.345.678', type: 'local', workplace: 'Tiệm thuốc Tam Hiệp', shift: 'Tại chỗ', lastAttended: '15/11/2026', points: 92, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-019', joinDate: '26/03/2018', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-18', name: 'Lê Hoàng Nam', phone: '0902.234.567', type: 'local', workplace: 'UBND Phường Trấn Biên', shift: 'Hành chính', lastAttended: '15/11/2026', points: 94, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-018', joinDate: '15/10/2023', occupation: 'Cán bộ / Viên chức', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-19', name: 'Phạm Hồng Nhung', phone: '0903.345.678', type: 'local', workplace: 'Tiệm thuốc Trấn Biên', shift: 'Tại chỗ', lastAttended: '15/11/2026', points: 92, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-019', joinDate: '26/03/2018', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-20', name: 'Đoàn Thanh Tùng', phone: '0904.456.789', type: 'local', workplace: 'Kỹ sư IT tự do', shift: 'Remote', lastAttended: '15/11/2026', points: 95, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-020', joinDate: '15/05/2019', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-21', name: 'Vũ Minh Hằng', phone: '0905.567.890', type: 'local', workplace: 'CĐ Y tế Đồng Nai', shift: 'Học tập', lastAttended: '15/11/2026', points: 88, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-021', joinDate: '26/03/2020', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-22', name: 'Nguyễn Đăng Khoa', phone: '0906.678.901', type: 'local', workplace: 'Cửa hàng xe máy KP5', shift: 'Tại chỗ', lastAttended: '15/11/2026', points: 87, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-022', joinDate: '19/05/2021', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-23', name: 'Bùi Kim Oanh', phone: '0907.789.012', type: 'local', workplace: 'Kế toán tư nhân', shift: 'Hành chính', lastAttended: '15/11/2026', points: 91, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-023', joinDate: '26/03/2022', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-24', name: 'Đặng Quốc Anh', phone: '0908.890.123', type: 'local', workplace: 'Điện lực Biên Hòa', shift: 'Kỹ thuật', lastAttended: '15/11/2026', points: 93, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-024', joinDate: '15/10/2023', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-25', name: 'Trịnh Thị Lan', phone: '0909.901.234', type: 'local', workplace: 'Trường Tiểu học Tam Hiệp', shift: 'Giáo viên', lastAttended: '15/11/2026', points: 95, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-025', joinDate: '26/03/2018', occupation: 'Cán bộ / Viên chức', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-26', name: 'Phan Minh Trí', phone: '0910.012.345', type: 'local', workplace: 'Bưu điện Tam Hiệp', shift: 'Bưu tá', lastAttended: '15/11/2026', points: 86, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-026', joinDate: '15/05/2019', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-27', name: 'Lê Thùy Dung', phone: '0911.123.456', type: 'local', workplace: 'Ngân hàng Agribank P. Tam Hiệp', shift: 'Giao dịch viên', lastAttended: '15/11/2026', points: 97, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-027', joinDate: '26/03/2020', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-25', name: 'Trịnh Thị Lan', phone: '0909.901.234', type: 'local', workplace: 'Trường Tiểu học Trấn Biên', shift: 'Giáo viên', lastAttended: '15/11/2026', points: 95, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-025', joinDate: '26/03/2018', occupation: 'Cán bộ / Viên chức', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-26', name: 'Phan Minh Trí', phone: '0910.012.345', type: 'local', workplace: 'Bưu điện Trấn Biên', shift: 'Bưu tá', lastAttended: '15/11/2026', points: 86, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-026', joinDate: '15/05/2019', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-27', name: 'Lê Thùy Dung', phone: '0911.123.456', type: 'local', workplace: 'Ngân hàng Agribank P. Trấn Biên', shift: 'Giao dịch viên', lastAttended: '15/11/2026', points: 97, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-027', joinDate: '26/03/2020', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-28', name: 'Tạ Văn Bình', phone: '0912.234.567', type: 'local', workplace: 'Xưởng mộc gia đình KP5', shift: 'Tại chỗ', lastAttended: '15/11/2026', points: 84, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-028', joinDate: '19/05/2021', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-29', name: 'Cao Thị Yến', phone: '0913.345.678', type: 'local', workplace: 'Cửa hàng tạp hóa KP5', shift: 'Tại chỗ', lastAttended: '15/11/2026', points: 89, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-029', joinDate: '26/03/2022', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-30', name: 'Ngô Đức Thắng', phone: '0914.456.789', type: 'local', workplace: 'Công ty vận tải Biên Hòa', shift: 'Tài xế', lastAttended: '15/11/2026', points: 82, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-030', joinDate: '15/10/2023', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-31', name: 'Mai Phương Uyên', phone: '0915.567.890', type: 'local', workplace: 'Trung tâm Ngoại ngữ KP5', shift: 'Trợ giảng', lastAttended: '15/11/2026', points: 94, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-031', joinDate: '26/03/2018', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-32', name: 'Lâm Hoàng Phúc', phone: '0916.678.901', type: 'local', workplace: 'Siêu thị Co.opmart Tam Hiệp', shift: 'Thu ngân', lastAttended: '15/11/2026', points: 88, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-032', joinDate: '15/05/2019', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-32', name: 'Lâm Hoàng Phúc', phone: '0916.678.901', type: 'local', workplace: 'Siêu thị Co.opmart Trấn Biên', shift: 'Thu ngân', lastAttended: '15/11/2026', points: 88, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-032', joinDate: '15/05/2019', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-33', name: 'Đoàn Thúy Nga', phone: '0917.789.012', type: 'local', workplace: 'Văn phòng Công chứng Đồng Nai', shift: 'Nhân viên', lastAttended: '15/11/2026', points: 92, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-033', joinDate: '26/03/2020', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-34', name: 'Phùng Văn Khôi', phone: '0918.890.123', type: 'local', workplace: 'Cửa hàng Viettel Tam Hiệp', shift: 'Tư vấn', lastAttended: '15/11/2026', points: 87, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-034', joinDate: '19/05/2021', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-34', name: 'Phùng Văn Khôi', phone: '0918.890.123', type: 'local', workplace: 'Cửa hàng Viettel Trấn Biên', shift: 'Tư vấn', lastAttended: '15/11/2026', points: 87, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-034', joinDate: '19/05/2021', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-35', name: 'Hồ Quỳnh Chi', phone: '0919.901.234', type: 'local', workplace: 'Nha khoa Nụ Cười Xinh KP5', shift: 'Y tá', lastAttended: '15/11/2026', points: 90, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-035', joinDate: '26/03/2022', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-36', name: 'Thái Bá Đạt', phone: '0920.012.345', type: 'local', workplace: 'Đại lý phân phối Bia KP5', shift: 'Kinh doanh', lastAttended: '15/11/2026', points: 83, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-036', joinDate: '15/10/2023', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-37', name: 'Vương Bảo Trâm', phone: '0921.123.456', type: 'local', workplace: 'Phòng Gym Fitness Tam Hiệp', shift: 'Huấn luyện viên', lastAttended: '15/11/2026', points: 91, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-037', joinDate: '26/03/2018', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-37', name: 'Vương Bảo Trâm', phone: '0921.123.456', type: 'local', workplace: 'Phòng Gym Fitness Trấn Biên', shift: 'Huấn luyện viên', lastAttended: '15/11/2026', points: 91, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-037', joinDate: '26/03/2018', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-38', name: 'Lương Thế Vinh', phone: '0922.234.567', type: 'local', workplace: 'Đồ họa freelance KP5', shift: 'Tự do', lastAttended: '15/11/2026', points: 86, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-038', joinDate: '15/05/2019', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-39', name: 'Đào Bích Ngọc', phone: '0923.345.678', type: 'local', workplace: 'Quán Cafe Thanh Niên KP5', shift: 'Quản lý', lastAttended: '15/11/2026', points: 95, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-039', joinDate: '26/03/2020', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-40', name: 'Bùi Gia Huy', phone: '0924.456.789', type: 'local', workplace: 'Garage sửa xe Tam Hiệp', shift: 'Thợ máy', lastAttended: '15/11/2026', points: 81, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-040', joinDate: '19/05/2021', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-40', name: 'Bùi Gia Huy', phone: '0924.456.789', type: 'local', workplace: 'Garage sửa xe Trấn Biên', shift: 'Thợ máy', lastAttended: '15/11/2026', points: 81, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-040', joinDate: '19/05/2021', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-41', name: 'Quách Ánh Dương', phone: '0925.567.890', type: 'local', workplace: 'Cửa hàng hoa tươi KP5', shift: 'Cắm hoa', lastAttended: '15/11/2026', points: 89, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-041', joinDate: '26/03/2022', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-42', name: 'Nghiêm Đình Long', phone: '0926.678.901', type: 'local', workplace: 'Khu thể thao Tam Hiệp', shift: 'Nhân viên', lastAttended: '15/11/2026', points: 85, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-042', joinDate: '15/10/2023', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-42', name: 'Nghiêm Đình Long', phone: '0926.678.901', type: 'local', workplace: 'Khu thể thao Trấn Biên', shift: 'Nhân viên', lastAttended: '15/11/2026', points: 85, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-042', joinDate: '15/10/2023', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-43', name: 'Hà Thị Kim Liên', phone: '0927.789.012', type: 'local', workplace: 'Xưởng may thời trang KP5', shift: 'Thiết kế', lastAttended: '15/11/2026', points: 92, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-043', joinDate: '26/03/2018', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-44', name: 'Trần Văn Hoàng', phone: '0928.890.123', type: 'local', workplace: 'Cửa hàng nhôm kính KP5', shift: 'Thợ chính', lastAttended: '15/11/2026', points: 84, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-044', joinDate: '15/05/2019', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
-  Member(id: 'dv-45', name: 'Chu Mỹ Duyên', phone: '0929.901.234', type: 'local', workplace: 'Shop mỹ phẩm Tam Hiệp', shift: 'Bán hàng', lastAttended: '15/11/2026', points: 88, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-045', joinDate: '26/03/2020', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
+  Member(id: 'dv-45', name: 'Chu Mỹ Duyên', phone: '0929.901.234', type: 'local', workplace: 'Shop mỹ phẩm Trấn Biên', shift: 'Bán hàng', lastAttended: '15/11/2026', points: 88, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-045', joinDate: '26/03/2020', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
   Member(id: 'dv-46', name: 'Tạ Minh Khôi', phone: '0930.012.345', type: 'local', workplace: 'Công ty thiết bị điện KP5', shift: 'Giao nhận', lastAttended: '15/11/2026', points: 87, makeupCount: 0, status: 'active', memberCode: 'ĐV-DN-046', joinDate: '19/05/2021', occupation: 'Lao động địa phương', branchName: 'Chi đoàn Khu phố 5', attendanceHistory: _hist([['Tháng 9', 'present', 'Có mặt'], ['Tháng 10', 'present', 'Có mặt'], ['Tháng 11', 'present', 'Có mặt']])),
 ];
 
@@ -394,11 +394,11 @@ BranchRank _br(String id, String name, String secretary, int total, int attended
 
 final wardDataByMonth = <String, MonthWardData>{
   '11': MonthWardData(
-    key: '11', monthLabel: 'Tháng 11/2026', reportDateText: 'Tam Hiệp, ngày 28 tháng 11 năm 2026', reportNumber: 'Số: 18-BC/ĐTN',
+    key: '11', monthLabel: 'Tháng 11/2026', reportDateText: 'Trấn Biên, ngày 28 tháng 11 năm 2026', reportNumber: 'Số: 18-BC/ĐTN',
     totalBranches: 12, totalMembers: 485, averageAttendanceRate: '73.4%', completedReports: '11/12 Chi đoàn',
     branchesRank: [
       _br('kp1', 'Chi đoàn Khu phố 1', 'Đ/c Lê Hoàng Minh', 42, 36, 85.7, 'submitted', 'Khu dân cư'),
-      _br('thcs', 'Chi đoàn Trường THCS Tam Hiệp', 'Đ/c Nguyễn Ngọc Ánh', 28, 24, 85.7, 'submitted', 'Trường học'),
+      _br('thcs', 'Chi đoàn Trường THCS Trấn Biên', 'Đ/c Nguyễn Ngọc Ánh', 28, 24, 85.7, 'submitted', 'Trường học'),
       _br('kp7', 'Chi đoàn Khu phố 7', 'Đ/c Phạm Văn Hùng', 36, 30, 83.3, 'submitted', 'Khu dân cư'),
       _br('kp4', 'Chi đoàn Khu phố 4', 'Đ/c Trần Quốc Tuấn', 35, 29, 82.9, 'submitted', 'Khu dân cư'),
       _br('yte', 'Chi đoàn Trạm Y tế & Dân quân', 'Đ/c Võ Minh Đức', 24, 19, 79.2, 'submitted', 'Hành chính sự nghiệp'),
@@ -407,34 +407,34 @@ final wardDataByMonth = <String, MonthWardData>{
       _br('kp5', 'Chi đoàn Khu phố 5 (Bí thư An)', 'Đ/c Nguyễn Văn An', 46, 33, 71.7, 'submitted', 'Khu dân cư & CN KCN', highlight: true),
       _br('tm', 'Chi đoàn Khu Nhà trọ Công nhân', 'Đ/c Hoàng Thị Thu', 52, 36, 69.2, 'submitted', 'Thanh niên công nhân'),
       _br('kp3', 'Chi đoàn Khu phố 3', 'Đ/c Vũ Đình Khoa', 50, 34, 68.0, 'submitted', 'Khu dân cư'),
-      _br('kcn', 'Chi đoàn DN KCN Tam Hiệp', 'Đ/c Lý Gia Bảo', 60, 37, 61.7, 'submitted', 'Doanh nghiệp KCN'),
+      _br('kcn', 'Chi đoàn DN KCN Trấn Biên', 'Đ/c Lý Gia Bảo', 60, 37, 61.7, 'submitted', 'Doanh nghiệp KCN'),
       _br('kp6', 'Chi đoàn Khu phố 6', 'Đ/c Mai Văn Hải', 40, 22, 55.0, 'pending', 'Khu dân cư'),
     ],
   ),
   '10': MonthWardData(
-    key: '10', monthLabel: 'Tháng 10/2026', reportDateText: 'Tam Hiệp, ngày 31 tháng 10 năm 2026', reportNumber: 'Số: 15-BC/ĐTN',
+    key: '10', monthLabel: 'Tháng 10/2026', reportDateText: 'Trấn Biên, ngày 31 tháng 10 năm 2026', reportNumber: 'Số: 15-BC/ĐTN',
     totalBranches: 12, totalMembers: 485, averageAttendanceRate: '58.1%', completedReports: '10/12 Chi đoàn',
     branchesRank: [
       _br('kp1', 'Chi đoàn Khu phố 1', 'Đ/c Lê Hoàng Minh', 42, 31, 73.8, 'submitted', 'Khu dân cư'),
       _br('kp4', 'Chi đoàn Khu phố 4', 'Đ/c Trần Quốc Tuấn', 35, 25, 71.4, 'submitted', 'Khu dân cư'),
-      _br('thcs', 'Chi đoàn Trường THCS Tam Hiệp', 'Đ/c Nguyễn Ngọc Ánh', 28, 20, 71.4, 'submitted', 'Trường học'),
+      _br('thcs', 'Chi đoàn Trường THCS Trấn Biên', 'Đ/c Nguyễn Ngọc Ánh', 28, 20, 71.4, 'submitted', 'Trường học'),
       _br('yte', 'Chi đoàn Trạm Y tế & Dân quân', 'Đ/c Võ Minh Đức', 24, 16, 66.7, 'submitted', 'Hành chính sự nghiệp'),
       _br('kp7', 'Chi đoàn Khu phố 7', 'Đ/c Phạm Văn Hùng', 36, 23, 63.9, 'submitted', 'Khu dân cư'),
       _br('kp2', 'Chi đoàn Khu phố 2', 'Đ/c Đỗ Thị Thanh Hà', 38, 24, 63.2, 'submitted', 'Khu dân cư'),
       _br('kp8', 'Chi đoàn Khu phố 8', 'Đ/c Bùi Tiến Dũng', 34, 21, 61.8, 'submitted', 'Khu dân cư'),
       _br('kp3', 'Chi đoàn Khu phố 3', 'Đ/c Vũ Đình Khoa', 50, 28, 56.0, 'submitted', 'Khu dân cư'),
       _br('tm', 'Chi đoàn Khu Nhà trọ Công nhân', 'Đ/c Hoàng Thị Thu', 52, 29, 55.8, 'pending', 'Thanh niên công nhân'),
-      _br('kcn', 'Chi đoàn DN KCN Tam Hiệp', 'Đ/c Lý Gia Bảo', 60, 30, 50.0, 'submitted', 'Doanh nghiệp KCN'),
+      _br('kcn', 'Chi đoàn DN KCN Trấn Biên', 'Đ/c Lý Gia Bảo', 60, 30, 50.0, 'submitted', 'Doanh nghiệp KCN'),
       _br('kp5', 'Chi đoàn Khu phố 5 (Bí thư An)', 'Đ/c Nguyễn Văn An', 46, 19, 41.3, 'submitted', 'Khu dân cư & CN KCN', highlight: true),
       _br('kp6', 'Chi đoàn Khu phố 6', 'Đ/c Mai Văn Hải', 40, 16, 40.0, 'pending', 'Khu dân cư'),
     ],
   ),
   '09': MonthWardData(
-    key: '09', monthLabel: 'Tháng 09/2026', reportDateText: 'Tam Hiệp, ngày 30 tháng 09 năm 2026', reportNumber: 'Số: 12-BC/ĐTN',
+    key: '09', monthLabel: 'Tháng 09/2026', reportDateText: 'Trấn Biên, ngày 30 tháng 09 năm 2026', reportNumber: 'Số: 12-BC/ĐTN',
     totalBranches: 12, totalMembers: 485, averageAttendanceRate: '67.0%', completedReports: '12/12 Chi đoàn',
     branchesRank: [
       _br('kp1', 'Chi đoàn Khu phố 1', 'Đ/c Lê Hoàng Minh', 42, 35, 83.3, 'submitted', 'Khu dân cư'),
-      _br('thcs', 'Chi đoàn Trường THCS Tam Hiệp', 'Đ/c Nguyễn Ngọc Ánh', 28, 22, 78.6, 'submitted', 'Trường học'),
+      _br('thcs', 'Chi đoàn Trường THCS Trấn Biên', 'Đ/c Nguyễn Ngọc Ánh', 28, 22, 78.6, 'submitted', 'Trường học'),
       _br('kp4', 'Chi đoàn Khu phố 4', 'Đ/c Trần Quốc Tuấn', 35, 27, 77.1, 'submitted', 'Khu dân cư'),
       _br('yte', 'Chi đoàn Trạm Y tế & Dân quân', 'Đ/c Võ Minh Đức', 24, 18, 75.0, 'submitted', 'Hành chính sự nghiệp'),
       _br('kp7', 'Chi đoàn Khu phố 7', 'Đ/c Phạm Văn Hùng', 36, 26, 72.2, 'submitted', 'Khu dân cư'),
@@ -443,16 +443,16 @@ final wardDataByMonth = <String, MonthWardData>{
       _br('tm', 'Chi đoàn Khu Nhà trọ Công nhân', 'Đ/c Hoàng Thị Thu', 52, 35, 67.3, 'submitted', 'Thanh niên công nhân'),
       _br('kp5', 'Chi đoàn Khu phố 5 (Bí thư An)', 'Đ/c Nguyễn Văn An', 46, 28, 60.9, 'submitted', 'Khu dân cư & CN KCN', highlight: true),
       _br('kp3', 'Chi đoàn Khu phố 3', 'Đ/c Vũ Đình Khoa', 50, 30, 60.0, 'submitted', 'Khu dân cư'),
-      _br('kcn', 'Chi đoàn DN KCN Tam Hiệp', 'Đ/c Lý Gia Bảo', 60, 33, 55.0, 'submitted', 'Doanh nghiệp KCN'),
+      _br('kcn', 'Chi đoàn DN KCN Trấn Biên', 'Đ/c Lý Gia Bảo', 60, 33, 55.0, 'submitted', 'Doanh nghiệp KCN'),
       _br('kp6', 'Chi đoàn Khu phố 6', 'Đ/c Mai Văn Hải', 40, 20, 50.0, 'submitted', 'Khu dân cư'),
     ],
   ),
 };
 
 const wardOfficerName = 'Phan Thị Bích Thảo';
-const wardOfficerRole = 'Cán bộ Đoàn Phường Tam Hiệp';
+const wardOfficerRole = 'Cán bộ Đoàn Phường Trấn Biên';
 const wardOfficerPhone = '0908.123.999';
-const wardDataName = 'Đoàn Thanh niên Phường Tam Hiệp';
+const wardDataName = 'Đoàn Thanh niên Phường Trấn Biên';
 
 final makeupSessions = [
   MakeupSession(id: 'mk-01', branchName: 'Chi đoàn Khối Doanh nghiệp KCN Amata', title: 'Sinh hoạt bù Chuyên đề: Kỹ năng an toàn lao động & Quyền lợi công đoàn', time: '09:00 - Chủ Nhật, 29/11/2026', format: 'Trực tiếp tại Nhà sinh hoạt Công nhân KCN Amata', seatsLeft: 8, suitableFor: 'Công nhân làm ca 2, ca đêm'),
@@ -475,23 +475,23 @@ final quizQuestions = [
 final rewardItems = [
   RewardItem(id: 'rw-1', title: 'Voucher Xăng Petrolimex 50.000đ', points: 30, category: 'Hỗ trợ đi lại công nhân KCN', sponsor: 'Công đoàn Các KCN Đồng Nai', icon: 'fuel', badge: 'Phổ biến', available: 45),
   RewardItem(id: 'rw-2', title: 'Vé xem phim Lotte Cinema Vincom Biên Hòa', points: 40, category: 'Văn hóa giải trí thanh niên', sponsor: 'Tỉnh Đoàn Đồng Nai', icon: 'film', available: 20),
-  RewardItem(id: 'rw-3', title: 'Áo thun Thanh niên Đồng Nai 2026', points: 50, category: 'Đồng phục thanh niên số', sponsor: 'Thành Đoàn Biên Hòa', icon: 'shirt', available: 15),
+  RewardItem(id: 'rw-3', title: 'Áo thun Thanh niên Đồng Nai 2026', points: 50, category: 'Đồng phục thanh niên số', sponsor: 'Tỉnh Đoàn Đồng Nai', icon: 'shirt', available: 15),
   RewardItem(id: 'rw-4', title: 'Vé Xe Tết Sum Vầy Về Quê Đón Tết', points: 80, category: 'Chương trình Tết công nhân KCN', sponsor: 'Liên đoàn Lao động Tỉnh Đồng Nai', icon: 'bus', badge: 'Ý nghĩa Tết', available: 10),
 ];
 
 final volunteerActivities = [
   VolunteerActivity(id: 'act-1', title: 'Ngày Thứ Bảy Tình Nguyện - Dọn dẹp vệ sinh đường nội bộ KCN Biên Hòa 2', date: '21/11/2026', location: 'Đường 2A, KCN Biên Hòa 2', points: '+20 điểm', pointsValue: 20, participantsCount: 42, status: 'completed'),
   VolunteerActivity(id: 'act-2', title: 'Hiến máu tình nguyện "Giọt hồng Đất Bưởi - Đồng Nai"', date: '08/11/2026', location: 'Trung tâm Văn hóa Thanh thiếu nhi Đồng Nai', points: '+30 điểm', pointsValue: 30, participantsCount: 68, status: 'completed'),
-  VolunteerActivity(id: 'act-3', title: 'Hỗ trợ người dân cài đặt chữ ký số và VNeID tại UBND Phường', date: '15/10/2026', location: 'UBND Phường Tam Hiệp, Biên Hòa', points: '+15 điểm', pointsValue: 15, participantsCount: 25, status: 'completed'),
+  VolunteerActivity(id: 'act-3', title: 'Hỗ trợ người dân cài đặt chữ ký số và VNeID tại UBND Phường', date: '15/10/2026', location: 'UBND Phường Trấn Biên, Biên Hòa', points: '+15 điểm', pointsValue: 15, participantsCount: 25, status: 'completed'),
   VolunteerActivity(id: 'act-4', title: 'Chiến dịch Mùa Đông Ấm thanh niên công nhân xa quê', date: '05/12/2026 (08:00 - 11:30)', location: 'Khu nhà trọ công nhân KP5 & KCN Amata', points: '+25 điểm', pointsValue: 25, participantsCount: 19, status: 'upcoming'),
-  VolunteerActivity(id: 'act-5', title: 'Đội hình Thanh niên Tình nguyện hỗ trợ dịch vụ công trực tuyến', date: '12/12/2026 (07:30 - 11:00)', location: 'Bộ phận Một cửa Phường Tam Hiệp', points: '+20 điểm', pointsValue: 20, participantsCount: 14, status: 'upcoming'),
+  VolunteerActivity(id: 'act-5', title: 'Đội hình Thanh niên Tình nguyện hỗ trợ dịch vụ công trực tuyến', date: '12/12/2026 (07:30 - 11:00)', location: 'Bộ phận Một cửa Phường Trấn Biên', points: '+20 điểm', pointsValue: 20, participantsCount: 14, status: 'upcoming'),
 ];
 
 final initialNotifications = <String, List<AppNotification>>{
   'secretary': [
     AppNotification(id: 'noti-sec-1', title: 'Có 2 đơn xin sinh hoạt bù cần phê duyệt', content: 'Đ/c Hoàng Văn Dũng (KCN Nhơn Trạch 1) và Đ/c Đỗ Hữu Tài (KCN Sông Mây) đã gửi minh chứng làm ca đêm.', time: '10 phút trước', type: 'makeup', unread: true),
     AppNotification(id: 'noti-sec-2', title: 'Nhắc lịch mở mã QR sinh hoạt tháng 12', content: 'Buổi sinh hoạt chuyên đề "Thanh niên công nhân tiên phong Số hóa" diễn ra lúc 20:00 ngày 28/11 tại NVH KP5.', time: '1 giờ trước', type: 'event', unread: true),
-    AppNotification(id: 'noti-sec-3', title: 'Đoàn Phường Tam Hiệp ghi nhận báo cáo T11', content: 'Chi đoàn KP5 đạt tỷ lệ 71.7% (+30.4% so với tháng 10) nhờ triển khai cơ chế ca bù.', time: 'Hôm qua', type: 'report', unread: false),
+    AppNotification(id: 'noti-sec-3', title: 'Đoàn Phường Trấn Biên ghi nhận báo cáo T11', content: 'Chi đoàn KP5 đạt tỷ lệ 71.7% (+30.4% so với tháng 10) nhờ triển khai cơ chế ca bù.', time: 'Hôm qua', type: 'report', unread: false),
   ],
   'member': [
     AppNotification(id: 'noti-mem-1', title: 'Nhắc lịch sinh hoạt Chi đoàn tháng 12/2026', content: 'Chủ đề: "Thanh niên công nhân tiên phong Số hóa". 20:00 Thứ Bảy 28/11 tại Nhà văn hóa KP5.', time: '15 phút trước', type: 'event', unread: true),
@@ -527,16 +527,16 @@ final initialMySchedule = [
 ];
 
 final scheduleCatalog = [
-  ScheduleItem(id: 'cat-01', title: 'Tọa đàm Thanh niên với Chuyển đổi số & Dịch vụ công', category: 'Chuyên đề', dateStr: '27/11/2026', dayOfWeek: 'T6', timeSlot: '19:00 - 20:30', room: 'Hội trường UBND Phường Tam Hiệp', organizer: 'Đoàn Phường Tam Hiệp', format: 'Trực tiếp • Kết hợp Livestream', points: '+15 điểm', seatsLeft: 18, isELearning: false),
-  ScheduleItem(id: 'cat-02', title: 'Đội hình Xung kích Hỗ trợ cài đặt VNeID & Chữ ký số', category: 'Tình nguyện', dateStr: '25/11/2026', dayOfWeek: 'T4', timeSlot: '08:00 - 11:00', room: 'Bộ phận Một cửa P. Tam Hiệp', organizer: 'Đoàn Phường Tam Hiệp', format: 'Trực tiếp', points: '+20 điểm', seatsLeft: 12, isELearning: false),
+  ScheduleItem(id: 'cat-01', title: 'Tọa đàm Thanh niên với Chuyển đổi số & Dịch vụ công', category: 'Chuyên đề', dateStr: '27/11/2026', dayOfWeek: 'T6', timeSlot: '19:00 - 20:30', room: 'Hội trường UBND Phường Trấn Biên', organizer: 'Đoàn Phường Trấn Biên', format: 'Trực tiếp • Kết hợp Livestream', points: '+15 điểm', seatsLeft: 18, isELearning: false),
+  ScheduleItem(id: 'cat-02', title: 'Đội hình Xung kích Hỗ trợ cài đặt VNeID & Chữ ký số', category: 'Tình nguyện', dateStr: '25/11/2026', dayOfWeek: 'T4', timeSlot: '08:00 - 11:00', room: 'Bộ phận Một cửa P. Trấn Biên', organizer: 'Đoàn Phường Trấn Biên', format: 'Trực tiếp', points: '+20 điểm', seatsLeft: 12, isELearning: false),
   ScheduleItem(id: 'cat-03', title: 'Tập huấn: Nghiệp vụ Đoàn viên & Quản lý Hồ sơ số', category: 'Chuyên đề', dateStr: '30/11/2026', dayOfWeek: 'T2', timeSlot: '19:30 - 20:45', room: 'Trực tuyến trên ứng dụng', organizer: 'Ban Tuyên giáo Tỉnh Đoàn', format: 'Trực tuyến • Có trắc nghiệm', points: '+15 điểm', seatsLeft: 999, isELearning: true),
-  ScheduleItem(id: 'cat-04', title: 'Sinh hoạt Liên Chi đoàn Quý IV & Giao lưu Thanh niên', category: 'Sinh hoạt', dateStr: '30/11/2026', dayOfWeek: 'T2', timeSlot: '18:00 - 19:30', room: 'Trung tâm Văn hóa Thanh thiếu nhi', organizer: 'Thành Đoàn Biên Hòa', format: 'Trực tiếp', points: '+10 điểm', seatsLeft: 25, isELearning: false),
+  ScheduleItem(id: 'cat-04', title: 'Sinh hoạt Liên Chi đoàn Quý IV & Giao lưu Thanh niên', category: 'Sinh hoạt', dateStr: '30/11/2026', dayOfWeek: 'T2', timeSlot: '18:00 - 19:30', room: 'Trung tâm Văn hóa Thanh thiếu nhi', organizer: 'Tỉnh Đoàn Đồng Nai', format: 'Trực tiếp', points: '+10 điểm', seatsLeft: 25, isELearning: false),
 ];
 
 final initialSocialPosts = [
   SocialPost(
-    id: 'post-event-1', authorId: 'ward-01', authorName: 'Phan Thị Bích Thảo', authorRole: 'Cán bộ Đoàn Phường Tam Hiệp • Cán bộ phát động', authorAvatar: 'Phan Thị Bích Thảo', branchName: 'Đoàn Phường Tam Hiệp', category: 'event', eventTag: 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên', isEventPost: true, verifiedOfficer: true, verifiedParticipant: true, registeredCount: 34, registeredByMe: false,
-    eventSchedule: ScheduleItem(id: 'ev-soc-1', title: 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên', category: 'Sự kiện Đoàn', dateStr: '29/11/2026', dayOfWeek: 'CN', timeSlot: '07:30 - 11:00', room: 'Nhà văn hóa KP5 & Khu vực Tam Hiệp', organizer: 'BCH Đoàn Phường Tam Hiệp', format: 'Trực tiếp • Điểm danh QR', points: '+25 điểm', isELearning: false),
+    id: 'post-event-1', authorId: 'ward-01', authorName: 'Phan Thị Bích Thảo', authorRole: 'Cán bộ Đoàn Phường Trấn Biên • Cán bộ phát động', authorAvatar: 'Phan Thị Bích Thảo', branchName: 'Đoàn Phường Trấn Biên', category: 'event', eventTag: 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên', isEventPost: true, verifiedOfficer: true, verifiedParticipant: true, registeredCount: 34, registeredByMe: false,
+    eventSchedule: ScheduleItem(id: 'ev-soc-1', title: 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên', category: 'Sự kiện Đoàn', dateStr: '29/11/2026', dayOfWeek: 'CN', timeSlot: '07:30 - 11:00', room: 'Nhà văn hóa KP5 & Khu vực Trấn Biên', organizer: 'BCH Đoàn Phường Trấn Biên', format: 'Trực tiếp • Điểm danh QR', points: '+25 điểm', isELearning: false),
     createdAt: '30 phút trước',
     content: 'Phát động Chiến dịch Mùa Đông Ấm tháng 11/2026! Kính mời các đồng chí đoàn viên đăng ký tham dự trực tiếp ngay bên dưới để hệ thống tự động đồng bộ vào Lịch cá nhân.',
     imageUrl: '1', likesCount: 42, likedByMe: false,
@@ -551,7 +551,7 @@ final initialSocialPosts = [
     comments: [Comment(id: 'cmt-1', authorName: 'Trần Minh Quân', text: 'Hoạt động rất ý nghĩa, hẹn mọi người vào cuối tuần này nhé!', time: '45 phút trước')],
   ),
   SocialPost(
-    id: 'post-3', authorId: 'dv-04', authorName: 'Phạm Thị Mỹ Linh', authorRole: 'Đoàn viên • Phường Tam Hiệp', authorAvatar: 'Phạm Thị Mỹ Linh', branchName: 'Chi đoàn Khu phố 5', category: 'event', eventTag: 'Hiến máu tình nguyện "Giọt hồng Đất Bưởi - Đồng Nai"', isEventPost: false, verifiedOfficer: false, verifiedParticipant: true, registeredCount: 0, registeredByMe: false,
+    id: 'post-3', authorId: 'dv-04', authorName: 'Phạm Thị Mỹ Linh', authorRole: 'Đoàn viên • Phường Trấn Biên', authorAvatar: 'Phạm Thị Mỹ Linh', branchName: 'Chi đoàn Khu phố 5', category: 'event', eventTag: 'Hiến máu tình nguyện "Giọt hồng Đất Bưởi - Đồng Nai"', isEventPost: false, verifiedOfficer: false, verifiedParticipant: true, registeredCount: 0, registeredByMe: false,
     eventSchedule: null, createdAt: '3 ngày trước',
     content: 'Lần thứ 4 tham gia hiến máu tình nguyện tại Trung tâm Văn hóa Thanh thiếu nhi Đồng Nai. Một giọt máu cho đi, một cuộc đời ở lại!',
     imageUrl: '3', likesCount: 53, likedByMe: false, comments: [],
@@ -559,9 +559,9 @@ final initialSocialPosts = [
 ];
 
 final initialTransferRequests = [
-  TransferRequest(id: 'tr-1', memberId: 'dv-13', memberName: 'Nguyễn Tấn Đạt', memberCode: 'ĐV-DN-013', direction: 'outgoing', fromBranch: 'Chi đoàn Khu phố 5 - P. Tam Hiệp', toBranch: 'Đoàn trường Đại học Đồng Nai', reason: 'Nhập học hệ Đại học chính quy năm học 2026 - 2030', submittedAt: '18/11/2026', status: 'approved_source', step: 3),
-  TransferRequest(id: 'tr-2', memberId: 'dv-14', memberName: 'Trương Ngọc Hân', memberCode: 'ĐV-DN-014', direction: 'outgoing', fromBranch: 'Chi đoàn Khu phố 5 - P. Tam Hiệp', toBranch: 'Chi đoàn Khu phố 2 - P. Quyết Thắng', reason: 'Chuyển hộ khẩu thường trú sang Phường Quyết Thắng', submittedAt: '22/11/2026', status: 'pending', step: 2),
-  TransferRequest(id: 'tr-3', memberId: 'dv-in-1', memberName: 'Ngô Minh Khải', memberCode: 'ĐV-LD-108', direction: 'incoming', fromBranch: 'Chi đoàn Ấp 3 - Xã An Phước, Long Thành', toBranch: 'Chi đoàn Khu phố 5 - P. Tam Hiệp', reason: 'Chuyển trọ đến Khu phố 5 để làm việc tại KCN Amata', submittedAt: '23/11/2026', status: 'pending', step: 2),
+  TransferRequest(id: 'tr-1', memberId: 'dv-13', memberName: 'Nguyễn Tấn Đạt', memberCode: 'ĐV-DN-013', direction: 'outgoing', fromBranch: 'Chi đoàn Khu phố 5 - P. Trấn Biên', toBranch: 'Đoàn trường Đại học Đồng Nai', reason: 'Nhập học hệ Đại học chính quy năm học 2026 - 2030', submittedAt: '18/11/2026', status: 'approved_source', step: 3),
+  TransferRequest(id: 'tr-2', memberId: 'dv-14', memberName: 'Trương Ngọc Hân', memberCode: 'ĐV-DN-014', direction: 'outgoing', fromBranch: 'Chi đoàn Khu phố 5 - P. Trấn Biên', toBranch: 'Chi đoàn Khu phố 2 - P. Quyết Thắng', reason: 'Chuyển hộ khẩu thường trú sang Phường Quyết Thắng', submittedAt: '22/11/2026', status: 'pending', step: 2),
+  TransferRequest(id: 'tr-3', memberId: 'dv-in-1', memberName: 'Ngô Minh Khải', memberCode: 'ĐV-LD-108', direction: 'incoming', fromBranch: 'Chi đoàn Ấp 3 - Xã An Phước, Long Thành', toBranch: 'Chi đoàn Khu phố 5 - P. Trấn Biên', reason: 'Chuyển trọ đến Khu phố 5 để làm việc tại KCN Amata', submittedAt: '23/11/2026', status: 'pending', step: 2),
 ];
 
 final digitalBadges = [
@@ -576,7 +576,7 @@ final sessionArchive = [
   {'id': 'arc-10', 'period': 'Tháng 10/2026', 'quarter': 'Quý IV/2026', 'year': '2026', 'title': 'Tuyên truyền ATGT & PCCC KCN', 'attended': 19, 'total': 46, 'rate': '41.3%', 'location': 'NVH Khu phố 5'},
   {'id': 'arc-09', 'period': 'Tháng 09/2026', 'quarter': 'Quý III/2026', 'year': '2026', 'title': 'Kỹ năng số cho thanh niên', 'attended': 28, 'total': 46, 'rate': '60.9%', 'location': 'NVH Khu phố 5'},
   {'id': 'arc-08', 'period': 'Tháng 08/2026', 'quarter': 'Quý III/2026', 'year': '2026', 'title': 'Tiếp sức mùa thi & Hành trình Đỏ', 'attended': 35, 'total': 46, 'rate': '76.1%', 'location': 'NVH Khu phố 5'},
-  {'id': 'arc-06', 'period': 'Tháng 06/2026', 'quarter': 'Quý II/2026', 'year': '2026', 'title': 'Chiến dịch Thanh niên Tình nguyện Hè', 'attended': 37, 'total': 45, 'rate': '82.2%', 'location': 'P. Tam Hiệp'},
+  {'id': 'arc-06', 'period': 'Tháng 06/2026', 'quarter': 'Quý II/2026', 'year': '2026', 'title': 'Chiến dịch Thanh niên Tình nguyện Hè', 'attended': 37, 'total': 45, 'rate': '82.2%', 'location': 'P. Trấn Biên'},
   {'id': 'arc-03', 'period': 'Tháng 03/2026', 'quarter': 'Quý I/2026', 'year': '2026', 'title': 'Tháng Thanh niên 26/03 - Kết nạp ĐV mới', 'attended': 41, 'total': 44, 'rate': '93.2%', 'location': 'NVH Khu phố 5'},
 ];
 
@@ -598,5 +598,5 @@ final rolePermissions = [
 
 final excelImportBatch = [
   {'name': 'Nguyễn Hữu Phước', 'phone': '0938.445.112', 'type': 'working_far', 'workplace': 'Cty Pouchen - KCN Biên Hòa 1', 'shift': 'Ca 2 (14h - 22h)', 'occupation': 'Công nhân sản xuất KCN', 'joinDate': '26/03/2023', 'points': 80},
-  {'name': 'Lê Ngọc Ánh', 'phone': '0977.882.910', 'type': 'local', 'workplace': 'Trường Mầm non Tam Hiệp', 'shift': 'Hành chính', 'occupation': 'Cán bộ / Viên chức', 'joinDate': '19/05/2022', 'points': 85},
+  {'name': 'Lê Ngọc Ánh', 'phone': '0977.882.910', 'type': 'local', 'workplace': 'Trường Mầm non Trấn Biên', 'shift': 'Hành chính', 'occupation': 'Cán bộ / Viên chức', 'joinDate': '19/05/2022', 'points': 85},
 ];

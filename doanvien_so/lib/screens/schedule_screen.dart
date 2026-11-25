@@ -81,7 +81,7 @@ class _MakeupSessionScreenState extends State<MakeupSessionScreen> {
       'dayOfWeek': 'CN',
       'timeSlot': launchTimeCtrl.text.trim(),
       'room': 'Theo phân công của Đoàn Phường',
-      'organizer': 'Đoàn Phường Tam Hiệp',
+      'organizer': 'Đoàn Phường Trấn Biên',
       'pointsValue': 25,
       'format': 'Trực tiếp • Điểm danh QR',
     });
@@ -873,7 +873,7 @@ class _MakeupSessionScreenState extends State<MakeupSessionScreen> {
                     'room': createRoomCtrl.text,
                     'pointsValue': 20,
                     'autoEnroll': true,
-                    'organizer': widget.currentRole == AppRole.wardOfficer ? 'Đoàn Phường Tam Hiệp' : 'BCH Chi đoàn Khu phố 5',
+                    'organizer': widget.currentRole == AppRole.wardOfficer ? 'Đoàn Phường Trấn Biên' : 'BCH Chi đoàn Khu phố 5',
                   });
                   Navigator.pop(ctx);
                   state.showToast('Đã thêm hoạt động mới vào danh sách đăng ký Lịch!');

@@ -103,8 +103,8 @@ def export_report(user: User = Depends(get_current_user), db: DBSession = Depend
     reports = db.exec(select(WardReport)).all()
     rep = {r.branch_id: r for r in reports}
     lines = [
-        "ĐOÀN TNCS HỒ CHÍ MINH", "PHƯỜNG TAM HIỆP", "Số: 18-BC/ĐTN", "",
-        "Tam Hiệp, ngày 28 tháng 11 năm 2026", "",
+        "ĐOÀN TNCS HỒ CHÍ MINH", "PHƯỜNG TRẤN BIÊN", "Số: 18-BC/ĐTN", "",
+        "Trấn Biên, ngày 28 tháng 11 năm 2026", "",
         "BÁO CÁO TÌNH HÌNH SINH HOẠT CHI ĐOÀN — THÁNG 11/2026", "",
     ]
     for i, b in enumerate(branches, 1):
@@ -155,7 +155,7 @@ def launch_activity(body: ActivityIn, user: User = Depends(get_current_user), db
     # Chuẩn hóa naive datetime → UTC
     starts = body.starts_at if body.starts_at.tzinfo else body.starts_at.replace(tzinfo=timezone.utc)
     a = Activity(title=body.title, category=body.category, starts_at=starts,
-                 location=body.location, points=body.points, organizer="Đoàn Phường Tam Hiệp",
+                 location=body.location, points=body.points, organizer="Đoàn Phường Trấn Biên",
                  launched_by=user.id or 0)
     db.add(a)
     db.add(AuditLog(actor=user.full_name, action=f'Phát động hoạt động toàn phường "{a.title}"'))

@@ -105,7 +105,7 @@ class _WardDashboardState extends State<WardDashboard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('ĐOÀN TNCS HỒ CHÍ MINH', style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w800)),
-                            const Text('BCH ĐOÀN P. TAM HIỆP', style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w800, color: D.primary)),
+                            const Text('BCH ĐOÀN P. TRẤN BIÊN', style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w800, color: D.primary)),
                             Text(data.reportNumber, style: const TextStyle(fontSize: 10.5, color: D.textMuted)),
                           ],
                         ),
@@ -120,7 +120,7 @@ class _WardDashboardState extends State<WardDashboard> {
                     ),
                     const Divider(height: 20),
                     Text('BÁO CÁO CÔNG TÁC ĐOÀN ${data.monthLabel.toUpperCase()}', textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
-                    Text('Kính gửi: Ban Thường vụ Thành Đoàn Biên Hòa', style: const TextStyle(fontSize: 11, color: D.textMuted)),
+                    Text('Kính gửi: Ban Thường vụ Tỉnh Đoàn Đồng Nai', style: const TextStyle(fontSize: 11, color: D.textMuted)),
                     const SizedBox(height: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,7 +150,7 @@ class _WardDashboardState extends State<WardDashboard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('Nơi nhận:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: D.textMuted)),
-                            const Text('- BTV Thành Đoàn;', style: TextStyle(fontSize: 11, color: D.textMuted)),
+                            const Text('- Trân trọng, BAN THƯỜNG VỤ TỈNH ĐOÀN;', style: TextStyle(fontSize: 11, color: D.textMuted)),
                             const Text('- Lưu: VP.', style: TextStyle(fontSize: 11, color: D.textMuted)),
                           ],
                         ),

@@ -18,10 +18,10 @@ def seed(db: DBSession) -> None:
 
     # --- Chi đoàn ---
     branches = [
-        Branch(id=1, name="Chi đoàn Khu phố 5", ward="Phường Tam Hiệp", secretary_name="Nguyễn Văn An", type="Khu dân cư & CN KCN", total_members=46),
+        Branch(id=1, name="Chi đoàn Khu phố 5", ward="Phường Trấn Biên", secretary_name="Nguyễn Văn An", type="Khu dân cư & CN KCN", total_members=46),
         Branch(id=2, name="Chi đoàn Khu phố 1", secretary_name="Lê Hoàng Minh", type="Khu dân cư", total_members=42),
-        Branch(id=3, name="Chi đoàn Trường THCS Tam Hiệp", secretary_name="Nguyễn Ngọc Ánh", type="Trường học", total_members=28),
-        Branch(id=4, name="Chi đoàn DN KCN Tam Hiệp", secretary_name="Lý Gia Bảo", type="Doanh nghiệp KCN", total_members=60),
+        Branch(id=3, name="Chi đoàn Trường THCS Trấn Biên", secretary_name="Nguyễn Ngọc Ánh", type="Trường học", total_members=28),
+        Branch(id=4, name="Chi đoàn DN KCN Trấn Biên", secretary_name="Lý Gia Bảo", type="Doanh nghiệp KCN", total_members=60),
         Branch(id=5, name="Chi đoàn Khu phố 6", secretary_name="Mai Văn Hải", type="Khu dân cư", total_members=40),
     ]
     db.add_all(branches)
@@ -60,16 +60,16 @@ def seed(db: DBSession) -> None:
     # Bí thư + 30 đoàn viên tại địa phương thực danh (mẫu)
     real_locals = [
         ("Nguyễn Văn An (Bí thư)", "Hộ kinh doanh KP5", 98), ("Trần Thị Mai", "Giáo viên Mầm non KP5", 96),
-        ("Lê Hoàng Nam", "UBND Phường Tam Hiệp", 94), ("Phạm Hồng Nhung", "Tiệm thuốc Tam Hiệp", 92),
+        ("Lê Hoàng Nam", "UBND Phường Trấn Biên", 94), ("Phạm Hồng Nhung", "Tiệm thuốc Trấn Biên", 92),
         ("Đoàn Thanh Tùng", "Kỹ sư IT tự do", 95), ("Vũ Minh Hằng", "CĐ Y tế Đồng Nai", 88),
         ("Nguyễn Đăng Khoa", "Cửa hàng xe máy KP5", 87), ("Bùi Kim Oanh", "Kế toán tư nhân", 91),
-        ("Đặng Quốc Anh", "Điện lực Biên Hòa", 93), ("Trịnh Thị Lan", "Trường Tiểu học Tam Hiệp", 95),
-        ("Phan Minh Trí", "Bưu điện Tam Hiệp", 86), ("Lê Thùy Dung", "Agribank P. Tam Hiệp", 97),
+        ("Đặng Quốc Anh", "Điện lực Biên Hòa", 93), ("Trịnh Thị Lan", "Trường Tiểu học Trấn Biên", 95),
+        ("Phan Minh Trí", "Bưu điện Trấn Biên", 86), ("Lê Thùy Dung", "Agribank P. Trấn Biên", 97),
         ("Tạ Văn Bình", "Xưởng mộc gia đình KP5", 84), ("Cao Thị Yến", "Cửa hàng tạp hóa KP5", 89),
         ("Ngô Đức Thắng", "Công ty vận tải Biên Hòa", 82), ("Mai Phương Uyên", "Trung tâm Ngoại ngữ KP5", 94),
-        ("Lâm Hoàng Phúc", "Co.opmart Tam Hiệp", 88), ("Đoàn Thúy Nga", "Văn phòng Công chứng", 92),
-        ("Phùng Văn Khôi", "Cửa hàng Viettel Tam Hiệp", 87), ("Hồ Quỳnh Chi", "Nha khoa Nụ Cười Xinh", 90),
-        ("Thái Bá Đạt", "Đại lý phân phối Bia KP5", 83), ("Vương Bảo Trâm", "Phòng Gym Tam Hiệp", 91),
+        ("Lâm Hoàng Phúc", "Co.opmart Trấn Biên", 88), ("Đoàn Thúy Nga", "Văn phòng Công chứng", 92),
+        ("Phùng Văn Khôi", "Cửa hàng Viettel Trấn Biên", 87), ("Hồ Quỳnh Chi", "Nha khoa Nụ Cười Xinh", 90),
+        ("Thái Bá Đạt", "Đại lý phân phối Bia KP5", 83), ("Vương Bảo Trâm", "Phòng Gym Trấn Biên", 91),
         ("Lương Thế Vinh", "Đồ họa freelance KP5", 86),
     ]
     roster = roster[:15] + [("ĐV-DN-%03d" % (16 + k), n, "local", w, "Hành chính", p, 0) for k, (n, w, p) in enumerate(real_locals)] + roster[15+23:]
@@ -110,8 +110,8 @@ def seed(db: DBSession) -> None:
 
     # --- Hoạt động + voucher + bảng tin ---
     db.add_all([
-        Activity(id=1, title="Mùa hè xanh 2026 – Dạy văn hóa cho em", category="Tình nguyện", starts_at=now + timedelta(days=20), location="Khu phố 5", points=120, organizer="Đoàn Phường Tam Hiệp", launched_by=3),
-        Activity(id=2, title="Chiến dịch Tết an toàn giao thông", category="Tình nguyện", starts_at=datetime(2027, 1, 10, tzinfo=UTC), location="Tam Hiệp", points=80, organizer="Đoàn Phường Tam Hiệp", launched_by=3),
+        Activity(id=1, title="Mùa hè xanh 2026 – Dạy văn hóa cho em", category="Tình nguyện", starts_at=now + timedelta(days=20), location="Khu phố 5", points=120, organizer="Đoàn Phường Trấn Biên", launched_by=3),
+        Activity(id=2, title="Chiến dịch Tết an toàn giao thông", category="Tình nguyện", starts_at=datetime(2027, 1, 10, tzinfo=UTC), location="Trấn Biên", points=80, organizer="Đoàn Phường Trấn Biên", launched_by=3),
     ])
     db.add_all([
         Voucher(id=1, title="Voucher cà phê Highlands", discount="Giảm 30%", cost_points=200, stock=30),
