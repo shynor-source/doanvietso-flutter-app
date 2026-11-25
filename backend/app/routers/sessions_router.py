@@ -130,9 +130,12 @@ def issue_qr(session_id: int, user: User = Depends(get_current_user), db: DBSess
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Không tìm thấy buổi sinh hoạt.")
     if not s.is_open:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "Buổi đã đóng — không thể phát mã.")
-    # Vô hiệu các mã cũ của buổi này (chống ảnh chụp màn hình)
+    # Vô hiệu các mã cũ chưa dùng của buổi này (chống ảnh chụp màn hình):
+    # xóa hẳn thay vì gắn cờ used_by=-1 — used_by là FK tới member.id, Postgres
+    # bắt buộc giá trị phải tồn tại trong bảng member.
     for t in db.exec(select(QrToken).where(QrToken.session_id == session_id)).all():
-        t.used_by = t.used_by or -1  # -1 = hết hiệu lực do xoay mã
+        if t.used_by is None:
+            db.delete(t)
     token = f"KP5-{s.starts_at.strftime('%Y%m')}-{secrets.token_hex(2).upper()}"
     tok = QrToken(session_id=session_id, token=token, issued_at=utcnow(),
                   expires_at=utcnow() + timedelta(seconds=QR_TTL_S))

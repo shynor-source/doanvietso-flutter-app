@@ -50,7 +50,8 @@ class TestQrGeofence:
         client.post("/sessions/1/qr", headers=auth_headers(client, "secretary"))  # xoay → mã old vô hiệu
         r = client.post("/sessions/1/checkin", headers=auth_headers(client, "member"), json={"token": old, **GEO_OK})
         assert r.status_code == 400
-        assert "1 lần" in r.json()["detail"] or "hết hạn" in r.json()["detail"]
+        # Mã đã bị xoá khi xoay mã mới (chống phát lại) → không còn hợp lệ
+        assert "1 lần" in r.json()["detail"] or "hết hạn" in r.json()["detail"] or "không đúng buổi" in r.json()["detail"]
 
     def test_07_token_het_han(self, client, db_session):
         tok = client.post("/sessions/1/qr", headers=auth_headers(client, "secretary")).json()["token"]

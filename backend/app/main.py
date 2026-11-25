@@ -36,8 +36,7 @@ async def _qr_watchdog():
                 rotated = False
                 for t in expired:
                     if t.used_by is None:
-                        t.used_by = -1  # vô hiệu
-                        db.add(t)
+                        db.delete(t)  # token hết hạn & chưa dùng: xóa (FK-int trên Postgres)
                         rotated = True
                 # Buổi đang mở mà thiếu token hợp lệ → phát hành mã mới
                 open_sessions = db.exec(select(SessionModel).where(SessionModel.is_open == True)).all()  # noqa: E712
