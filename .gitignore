@@ -1,0 +1,19 @@
+# Không công khai
+*.apk
+*.db
+*.db-journal
+.env
+DEMO_CREDENTIALS.md
+
+# Thư mục nội bộ / repo khác
+/design/
+/assets/
+/agent_resoures/
+/figma-plugin/
+
+# Rác hệ thống
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+.DS_Store

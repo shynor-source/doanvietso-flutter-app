@@ -1,0 +1,22 @@
+# Render Blueprint — deploy backend Đoàn Viên Số
+# Deploy: Render Dashboard → New + → Blueprint → chọn repo này → điền biến môi trường
+# Yêu cầu: DATABASE_URL (Aiven Postgres free), DOANVIEN_DEMO_OTP, DOANVIEN_DEMO_PASSWORD
+services:
+  - type: web
+    name: doanvien-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false          # dán chuỗi kết nối Aiven Postgres khi deploy
+      - key: DOANVIEN_SECRET
+        generateValue: true  # Render tự sinh khóa JWT ngẫu nhiên
+      - key: DOANVIEN_DEMO_OTP
+        sync: false          # đặt mã OTP riêng cho bản demo
+      - key: DOANVIEN_DEMO_PASSWORD
+        sync: false          # đặt mật khẩu demo riêng
+    # autoDeploy: true (mặc định) — push lên main là tự deploy lại
