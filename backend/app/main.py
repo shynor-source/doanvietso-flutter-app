@@ -100,7 +100,7 @@ def health():
     return {"app": "Đoàn Viên Số API", "status": "ok", "round": 2}
 
 
-@app.get("/health", tags=["health"], summary="Health check cho uptime monitor (không đụng DB)")
+@app.api_route("/health", methods=["GET", "HEAD"], tags=["health"], summary="Health check cho uptime monitor (không đụng DB)")
 def health_ping():
     """Endpoint siêu nhẹ để uptime monitor (UptimeRobot…) ping giữ service không ngủ.
     Không chạm CSDL, không auth — phản hồi trong vài ms."""
@@ -110,7 +110,7 @@ def health_ping():
 # Không ghi log access cho /health (monitor ping 5 phút/lần → tránh spam log)
 class _SkipHealthLog(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:
-        return "GET /health" not in record.getMessage().split("?")[0]
+        return "/health" not in record.getMessage().split("?")[0]
 
 
 logging.getLogger("uvicorn.access").addFilter(_SkipHealthLog())
