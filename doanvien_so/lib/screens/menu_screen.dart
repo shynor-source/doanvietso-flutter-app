@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../state/app_state.dart';
 import '../ui.dart';
+import 'assistant_screen.dart';
 
 class UtilitiesMenuScreen extends StatefulWidget {
   final AppState state;
@@ -47,6 +48,7 @@ class _UtilitiesMenuScreenState extends State<UtilitiesMenuScreen> {
 
     final shortcuts = <(String, String, String, IconData, Color, Color, VoidCallback)>[
       // ===== Chung (mọi vai trò) =====
+      ('assistant', 'Trợ lý ảo AI', 'Hỏi chức năng ở đâu — dẫn thẳng tới màn hình', Icons.smart_toy_rounded, const Color(0xFFF5F3FF), const Color(0xFF6D28D9), () => openAssistantSheet(context, state, widget.currentRole, widget.onNavigateScreen)),
       ('home', 'Trang chủ', 'Tổng quan hoạt động', Icons.home_rounded, D.light, D.primary, () => widget.onNavigateScreen(widget.currentRole == AppRole.wardOfficer ? 'ward_dash' : 'home')),
       ('social', 'Bảng tin Đoàn viên', '${state.socialPosts.length} bài viết sự kiện', Icons.article_rounded, const Color(0xFFEFF6FF), const Color(0xFF1D4ED8), () => widget.onNavigateScreen('social')),
 

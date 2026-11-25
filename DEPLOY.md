@@ -36,8 +36,10 @@
    - Build: `pip install -r requirements.txt`
    - Start: `uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1`
    - Env vars: `DATABASE_URL=<Aiven string>`, `DOANVIEN_SECRET=<khóa mới>`,
-     `DOANVIEN_DEMO_OTP=<mới>`, `DOANVIEN_DEMO_PASSWORD=<mới>`, `DOANVIEN_ALLOW_SEED=0`
-     nếu muốn tắt seed tự động trên bản thật.
+     `DOANVIEN_DEMO_OTP=<mới>`, `DOANVIEN_DEMO_PASSWORD=<mới>`, `DOANVIEN_ALLOW_SEED=0`,
+     `GEMINI_API_KEY=<key miễn phí từ https://aistudio.google.com/apikey>` (bật Trợ lý AI —
+     model gemini-3.5-flash-lite, free tier 500 request/ngày; không đặt key thì trợ lý
+     tự chuyển sang chế độ tra cứu từ khóa nội bộ, vẫn dùng được).
 3. **UptimeRobot (free: 50 monitor, ping 5 phút/lần):** HTTP monitor ping
    `https://<render-app>.onrender.com/health` — endpoint siêu nhẹ không đụng DB
    (đã có sẵn, trả `{"status":"ok"}` trong vài ms, không spam access log).
