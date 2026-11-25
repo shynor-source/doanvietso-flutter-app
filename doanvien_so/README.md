@@ -1,8 +1,8 @@
 # ĐOÀN VIÊN SỐ — Ứng dụng Flutter (Android MVP)
-**Hackathon Đồng Nai 2026 • Round 2 — kết nối backend thật (FastAPI) + phân quyền RBAC 3 lớp**
+**Hackathon Đồng Nai 2026 • Kết nối backend thật (FastAPI) + phân quyền RBAC 3 lớp**
 
-> Bản này là **triển khai mobile của bộ thiết kế** trong `../design/README.md` — cùng vai trò, cùng luồng, cùng design token. Bản web demo xem tại thư mục `design/`.
-> **Cài thử nhanh nhất:** cài trực tiếp file APK `../doanvien_so_v2.3.apk` (Android 6+), không cần build.
+> Triển khai mobile của bộ thiết kế "Đoàn Viên Số" (repo thiết kế UI tách riêng) — cùng
+> vai trò, cùng luồng, cùng design token. Backend cùng repo tại `../backend/`.
 
 ---
 
@@ -37,7 +37,8 @@ lib/
 
 ## 3. Kết nối backend (FastAPI)
 
-Backend chạy riêng tại `../backend/` (FastAPI + SQLModel + SQLite, chi tiết xem `../backend/README.md`).
+Backend cùng repo tại `../backend/` (FastAPI + SQLModel — chi tiết xem `../backend/README.md`),
+đã triển khai công khai qua Render Blueprint; database PostgreSQL trên Aiven.
 
 ```bash
 # 1. Chạy backend (mặc định port 8000)
@@ -45,7 +46,8 @@ cd ../backend && .venv/bin/uvicorn app.main:app --port 8000
 
 # 2. Chạy app trỏ tới server
 flutter run --dart-define=API_BASE=http://10.0.2.2:8000   # emulator Android
-# Máy thật: dùng IP LAN của máy chạy backend, ví dụ http://192.168.1.10:8000
+# Máy thật qua LAN: http://<IP-máy-chạy-backend>:8000
+# Server công khai (Render): xem biến môi trường của bản deploy
 ```
 
 - Không truyền `API_BASE` → mặc định `http://10.0.2.2:8000` (emulator); app vẫn chạy được **chế độ demo dữ liệu mẫu** nếu server không có.
@@ -53,12 +55,22 @@ flutter run --dart-define=API_BASE=http://10.0.2.2:8000   # emulator Android
   backend tự seed dữ liệu mẫu. Thông tin đăng nhập **không công bố trên repo công khai**
   — ban tổ chức/giám khảo nhận riêng từ đội dự án.
 
-## 4. Chạy & build
+## 4. Build APK release
 
 ```bash
 flutter pub get
-flutter run                 # hoặc: flutter devices && flutter run -d <device-id>
-flutter build apk --release # → build/app/outputs/flutter-apk/app-release.apk
+flutter build apk --release \
+  --dart-define=API_BASE=https://<server-của-bạn> \
+  --dart-define=DEMO_OTP=<mã-otp-của-bản-demo>
+# → build/app/outputs/flutter-apk/app-release.apk (cài trực tiếp, Android 6+)
 ```
 
-Bản APK sẵn có ở thư mục gốc dự án: `doanvien_so_v2.3.apk` — cài trực tiếp, bật "Cài từ nguồn không xác định".
+- `API_BASE` — địa chỉ backend; mặc định `http://10.0.2.2:8000` (emulator).
+- `DEMO_OTP` — mã OTP demo hiển thị sẵn trên màn hình đăng nhập; **không nằm trong mã
+  nguồn**, truyền lúc build. Bản nội bộ qua LAN có thể bỏ `DEMO_OTP`.
+- App hoạt động offline an toàn: server không khả dụng → tự chuyển dữ liệu mẫu, không crash.
+
+## 5. Phát hành
+
+Phân phát APK qua **GitHub Releases** của repo này (file 50MB, không giới hạn dung lượng).
+Bật "Cài từ nguồn không xác định" khi cài lần đầu.

@@ -1,4 +1,8 @@
-# DEPLOY — Kế hoạch triển khai Đoàn Viên Số (kết quả research 11/2026)
+# DEPLOY — Triển khai Đoàn Viên Số
+
+> **Trạng thái: ĐÃ DEPLOY.** API chạy trên Render (Blueprint `render.yaml`), database
+> PostgreSQL trên Aiven free tier, uptime monitor ping `/health` 5 phút/lần.
+> Kết quả research nền tảng bên dưới giữ lại làm tài liệu tham khảo.
 
 ## Ràng buộc
 
@@ -19,9 +23,7 @@
 
 ## Khuyến nghị
 
-### Phương án A — Combo Render + Aiven + UptimeRobot (0đ, "không ngủ" bằng monitor)
-
-Đề xuất của team: Render free có spin-down sau 15 phút idle — dùng monitor ping liên tục
+### Phương án A (đang dùng) — Combo Render + Aiven + UptimeRobot (0đ) Render free có spin-down sau 15 phút idle — dùng monitor ping liên tục
 để giữ sống; SQLite tạm trên Render thay bằng Aiven Postgres free để dữ liệu không mất.
 
 1. **Aiven for PostgreSQL (free, không cần thẻ):** tạo service → lấy connection string
