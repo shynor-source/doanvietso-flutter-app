@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import '../services/api.dart';
 import '../state/app_state.dart';
 import '../ui.dart';
 
@@ -54,6 +57,17 @@ class _AssistantSheetState extends State<_AssistantSheet> {
     super.dispose();
   }
 
+  Future<dynamic> _askOnce(String q) async {
+    // Lần 1 có thể vội Render từ trạng thái ngủ (cold-start); tự thử lại 1 lần
+    try {
+      return await widget.state.api
+          .post('/assistant/ask', {'question': q}, null, const Duration(seconds: 30));
+    } on TimeoutException {
+      return await widget.state.api
+          .post('/assistant/ask', {'question': q}, null, const Duration(seconds: 30));
+    }
+  }
+
   Future<void> _send(String q) async {
     if (_busy || q.trim().isEmpty) return;
     setState(() {
@@ -63,7 +77,7 @@ class _AssistantSheetState extends State<_AssistantSheet> {
     _ctrl.clear();
     _scrollDown();
     try {
-      final r = await widget.state.api.post('/assistant/ask', {'question': q.trim()});
+      final r = await _askOnce(q.trim());
       final steps = (r['steps'] as List<dynamic>? ?? []).whereType<String>().toList();
       setState(() => _messages.add(_Msg(
             (r['answer'] as String?) ?? 'Chưa có câu trả lời.',
@@ -71,6 +85,13 @@ class _AssistantSheetState extends State<_AssistantSheet> {
             nav: r['nav'] as String?,
             navLabel: r['nav_label'] as String?,
             source: (r['source'] as String?) ?? 'fallback',
+          )));
+    } on ApiException catch (e) {
+      setState(() => _messages.add(_Msg(
+            e.statusCode == 401
+                ? 'Phiên đăng nhập đã hết hạn — thoát app rồi đăng nhập lại nhé.'
+                : 'Trợ lý AI chưa trả lời được (${e.message}). Thử lại sau ít phút.',
+            source: 'error',
           )));
     } catch (_) {
       setState(() => _messages.add(_Msg(

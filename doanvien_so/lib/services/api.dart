@@ -45,8 +45,8 @@ class ApiClient {
     return _decode(r);
   }
 
-  Future<dynamic> post(String path, [Map<String, dynamic>? body, Map<String, String>? q]) async {
-    final r = await _c.post(_u(path, q), headers: _h, body: jsonEncode(body ?? {})).timeout(_timeout);
+  Future<dynamic> post(String path, [Map<String, dynamic>? body, Map<String, String>? q, Duration? timeout]) async {
+    final r = await _c.post(_u(path, q), headers: _h, body: jsonEncode(body ?? {})).timeout(timeout ?? _timeout);
     return _decode(r);
   }
 
