@@ -15,6 +15,19 @@ engine = create_engine(
 )
 
 
+def migrate_db():
+    """Migration nhẹ cho CSDL đã tồn tại: SQLModel.create_all không thêm cột mới vào bảng cũ."""
+    from sqlalchemy import text
+    with engine.begin() as conn:
+        if engine.dialect.name == "postgresql":
+            conn.execute(text("ALTER TABLE post ADD COLUMN IF NOT EXISTS activity_id INTEGER"))
+        else:
+            try:
+                conn.execute(text("ALTER TABLE post ADD COLUMN activity_id INTEGER"))
+            except Exception:
+                pass  # cột đã tồn tại
+
+
 def fix_postgres_sequences():
     """Sau khi seed chèn bản ghi với id tường minh, sequence tự tăng của PostgreSQL
     không được đẩy lên → insert mới sẽ trùng khóa. Căn chỉnh lại toàn bộ."""

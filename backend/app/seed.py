@@ -120,6 +120,7 @@ def seed(db: DBSession) -> None:
     db.add_all([
         Post(id=1, author_id=1, content="🔥 33/46 đoàn viên đã hoàn thành điểm danh buổi sinh hoạt tháng 11. Cảm ơn các bạn công nhân KCN đã tham gia dù vừa tan ca!", is_pinned=True),
         Post(id=2, author_id=2, content="Buổi e-learning 'Nghị quyết Đại hội Đoàn' rất hay, chị em công nhân nhà máy cùng nhau học sau ca 2 📚"),
+        Post(id=3, author_id=3, content="🌳 PHÁT ĐỘNG: 'Mùa hè xanh 2026 – Dạy văn hóa cho em' toàn phường! Anh chị em đoàn viên đăng ký tham dự ngay từ bài viết này để được cộng điểm rèn luyện và nhận nhắc lịch trước giờ diễn ra nhé!", is_event=True, activity_id=1),
     ])
     db.add(AuditLog(actor="Hệ thống", action="Khởi tạo dữ liệu mẫu Vòng 2"))
     db.commit()

@@ -12,7 +12,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session as DBSession, select
 
-from .database import get_session, init_db, engine, fix_postgres_sequences
+from .database import get_session, init_db, engine, migrate_db, fix_postgres_sequences
 from .seed import seed
 from .models import QrToken, Session as SessionModel, utcnow
 
@@ -63,6 +63,7 @@ async def _qr_watchdog():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
+    migrate_db()
     # Seed dữ liệu mẫu: bỏ qua khi đặt DOANVIEN_ALLOW_SEED=0 (triển khai thật)
     if os.environ.get("DOANVIEN_ALLOW_SEED", "1") != "0":
         with DBSession(engine) as db:

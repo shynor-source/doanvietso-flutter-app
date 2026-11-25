@@ -5,7 +5,7 @@ from sqlmodel import Session as DBSession, select
 
 from ..auth import get_current_user, require_permission
 from ..database import get_session
-from ..models import AuditLog, Comment, Post, User, utcnow
+from ..models import Activity, AuditLog, Comment, Post, User, utcnow
 
 router = APIRouter(prefix="/social", tags=["social"])
 
@@ -13,6 +13,7 @@ router = APIRouter(prefix="/social", tags=["social"])
 class PostIn(BaseModel):
     content: str
     is_event: bool = False
+    activity_id: int | None = None
 
 
 class CommentIn(BaseModel):
@@ -27,15 +28,20 @@ def list_posts(db: DBSession = Depends(get_session)):
     for p in posts:
         comments = db.exec(select(Comment).where(Comment.post_id == p.id)).all()
         author = db.get(User, p.author_id)
+        activity = db.get(Activity, p.activity_id) if p.activity_id else None
         out.append({"id": p.id, "author_id": p.author_id, "author_name": author.full_name if author else "Ẩn danh",
                     "role": author.role if author else "member", "content": p.content, "is_event": p.is_event,
-                    "is_pinned": p.is_pinned, "created_at": p.created_at, "comments": len(comments)})
+                    "is_pinned": p.is_pinned, "created_at": p.created_at, "comments": len(comments),
+                    "activity_id": p.activity_id,
+                    "activity": ({"id": activity.id, "title": activity.title, "category": activity.category,
+                                  "starts_at": activity.starts_at, "location": activity.location,
+                                  "points": activity.points, "organizer": activity.organizer} if activity else None)})
     return out
 
 
 @router.post("/posts", summary="Đăng bài (mọi vai trò)")
 def create_post(body: PostIn, user: User = Depends(get_current_user), db: DBSession = Depends(get_session)):
-    p = Post(author_id=user.id or 0, content=body.content, is_event=body.is_event)
+    p = Post(author_id=user.id or 0, content=body.content, is_event=body.is_event, activity_id=body.activity_id)
     db.add(p)
     db.commit()
     db.refresh(p)

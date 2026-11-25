@@ -138,6 +138,7 @@ class Post(SQLModel, table=True):
     content: str
     is_event: bool = False
     is_pinned: bool = False
+    activity_id: Optional[int] = Field(default=None, foreign_key="activity.id", index=True)
     created_at: datetime = Field(default_factory=utcnow)
 
 
