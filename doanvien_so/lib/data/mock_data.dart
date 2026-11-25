@@ -249,7 +249,7 @@ class SocialPost {
   final String? imageUrl;
   int likesCount;
   bool likedByMe;
-  final List<Comment> comments;
+  List<Comment> comments;
   SocialPost({required this.id, required this.authorId, required this.authorName, required this.authorRole, required this.authorAvatar, required this.branchName, required this.category, required this.eventTag, required this.isEventPost, this.pinned = false, required this.verifiedOfficer, required this.verifiedParticipant, required this.registeredCount, required this.registeredByMe, required this.eventSchedule, required this.createdAt, required this.content, this.imageUrl, required this.likesCount, required this.likedByMe, required this.comments});
 }
 

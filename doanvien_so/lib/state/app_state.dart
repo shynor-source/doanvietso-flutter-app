@@ -1109,7 +1109,7 @@ class AppState extends ChangeNotifier {
       imageUrl: null,
       likesCount: 0,
       likedByMe: false,
-      comments: const [],
+      comments: [],  // mutable — const [] làm nút gửi bình luận crash im lặng
     );
   }
 
@@ -1309,9 +1309,11 @@ class AppState extends ChangeNotifier {
     if (text.trim().isEmpty) return;
     for (final p in socialPosts) {
       if (p.id == postId) {
-        p.comments.add(Comment(id: 'cmt-${DateTime.now().millisecondsSinceEpoch}', authorName: authorName, text: text.trim(), time: 'Vừa xong'));
+        // tạo list mới thay vì add — phòng trường hợp list không thể sửa (const/unmodifiable)
+        p.comments = [...p.comments, Comment(id: 'cmt-${DateTime.now().millisecondsSinceEpoch}', authorName: authorName, text: text.trim(), time: 'Vừa xong')];
         // Ghi bình luận xuống máy chủ (nếu bài đã đồng bộ từ server)
-        final pid = _backendIdOf(postId);
+        final m = RegExp(r'^(?:p|post-)(\d+)$').firstMatch(postId);
+        final pid = m == null ? null : int.tryParse(m.group(1)!);
         if (pid != null && backendLive) {
           _apiFire(api.post('/social/posts/$pid/comment', {'content': text.trim()}));
         }

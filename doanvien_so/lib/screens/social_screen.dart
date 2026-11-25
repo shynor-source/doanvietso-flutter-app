@@ -689,6 +689,7 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
                       Expanded(
                         child: TextField(
                           controller: commentCtrls.putIfAbsent(post.id, () => TextEditingController()),
+                          onSubmitted: (_) => state.addSocialComment(post.id, myName, commentCtrls[post.id]!.text),
                           style: const TextStyle(fontSize: 13),
                           decoration: InputDecoration(
                             isDense: true,
@@ -708,6 +709,7 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
                           final c = commentCtrls[post.id]!;
                           state.addSocialComment(post.id, myName, c.text);
                           c.clear();
+                          FocusManager.instance.primaryFocus?.unfocus();
                         },
                         child: Container(
                           width: 40,
