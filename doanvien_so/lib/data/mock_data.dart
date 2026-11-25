@@ -12,7 +12,7 @@ class Member {
   int makeupCount;
   String status; // active | warning | pending_transfer | military
   String? note;
-  final String memberCode;
+  String memberCode; // non-final: đồng bộ từ server khi đăng nhập
   final String joinDate;
   final String occupation;
   final String branchName;

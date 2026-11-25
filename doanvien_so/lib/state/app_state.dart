@@ -878,6 +878,29 @@ class AppState extends ChangeNotifier {
     if (!api.hasToken) return;
     backendLive = true;
     try {
+      // 0. Hồ sơ cá nhân (mọi vai trò): đồng bộ điểm/thành viên thật từ server —
+      //    quan trọng với Đoàn viên vì /members bị RBAC chặn (không được dùng mock)
+      try {
+        final me = await api.get('/auth/me') as Map;
+        final mem = me['member'];
+        if (mem is Map) {
+          final points = _intOf(mem['points']);
+          final id = '${mem['id']}';
+          final idx = members.indexWhere((m) => m.id == id);
+          if (idx >= 0) {
+            members[idx].points = points;
+          } else {
+            // server trả hồ sơ chưa có trong danh sách (Đoàn viên đang dùng mock):
+            // cập nhật điểm + mã vào bản mock của chính mình để hero hiển thị đúng
+            final cur = currentMember;
+            cur.points = points;
+            if ((mem['member_code'] as String?)?.isNotEmpty == true) {
+              cur.memberCode = mem['member_code'] as String;
+            }
+          }
+        }
+      } on ApiException catch (_) {/* bỏ qua — dùng dữ liệu hiện có */}
+
       // 1. Hồ sơ đoàn viên (bí thư/phường có quyền; đoàn viên giữ dữ liệu mock)
       try {
         final mems = await api.get('/members') as List;
