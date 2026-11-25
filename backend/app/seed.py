@@ -25,6 +25,7 @@ def seed(db: DBSession) -> None:
         Branch(id=5, name="Chi đoàn Khu phố 6", secretary_name="Mai Văn Hải", type="Khu dân cư", total_members=40),
     ]
     db.add_all(branches)
+    db.flush()
 
     # --- Tài khoản demo (thông tin đăng nhập không công bố trên repo công khai) ---
     pw = auth.hash_password(auth.DEMO_PASSWORD)
@@ -34,6 +35,7 @@ def seed(db: DBSession) -> None:
         User(id=3, phone="0903334444", password_hash=pw, full_name="Phan Thị Bích Thảo", role="ward_officer", branch_id=1),
     ]
     db.add_all(users)
+    db.flush()  # Postgres: ghi user trước member (khóa ngoại user_id)
 
     # --- 46 đoàn viên Chi đoàn KP5 (31 local / 12 far / 3 transferred) ---
     roster = [
@@ -80,6 +82,7 @@ def seed(db: DBSession) -> None:
             points=points, makeup_count=makeups, status="warning" if points < 70 else "active",
         ))
     db.add_all(members)
+    db.flush()
     db.get(Branch, 1).total_members = 46
 
     # --- Buổi sinh hoạt đang mở ---
