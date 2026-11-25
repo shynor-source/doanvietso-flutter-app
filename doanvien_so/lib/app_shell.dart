@@ -45,6 +45,8 @@ class _AppShellState extends State<AppShell> {
   String memberSubTab = 'scan';
   int exportModalTrigger = 0;
   Timer? _clock;
+  Timer? _toastTimer;
+  String? _lastToast;
   DateTime _now = DateTime.now();
 
   @override
@@ -55,9 +57,24 @@ class _AppShellState extends State<AppShell> {
     });
   }
 
+  // Toast tự tắt sau 4 giây (kể cả khi toast mới thay toast cũ — đếm lại từ đầu)
+  void _autoDismissToast(String? toast) {
+    if (toast == _lastToast) return;
+    _lastToast = toast;
+    _toastTimer?.cancel();
+    if (toast == null) return;
+    _toastTimer = Timer(const Duration(seconds: 4), () {
+      final app = AppStateScope.of(context);
+      if (mounted && app.globalToast != null && app.globalToast == toast) {
+        app.clearToast();
+      }
+    });
+  }
+
   @override
   void dispose() {
     _clock?.cancel();
+    _toastTimer?.cancel();
     super.dispose();
   }
 
@@ -291,6 +308,7 @@ class _AppShellState extends State<AppShell> {
   Widget build(BuildContext context) {
     final state = AppStateScope.of(context);
     final info = headerInfo;
+    _autoDismissToast(state.globalToast);
 
     return Scaffold(
       backgroundColor: activeScreen == 'login' ? Colors.white : D.pageBg,
