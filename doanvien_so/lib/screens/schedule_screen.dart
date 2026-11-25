@@ -604,9 +604,9 @@ class _MakeupSessionScreenState extends State<MakeupSessionScreen> {
                       child: Container(
                         height: 36,
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(color: D.primary, borderRadius: BorderRadius.circular(12)),
+                        decoration: BoxDecoration(color: readOnly ? D.light : D.primary, borderRadius: BorderRadius.circular(12)),
                         child: Row(children: [
-                          Icon(item.isELearning ? Icons.menu_book_rounded : Icons.qr_code_2, size: 14, color: Colors.white),
+                          Icon(item.isELearning ? Icons.menu_book_rounded : Icons.qr_code_2, size: 14, color: readOnly ? D.primary : Colors.white),
                           const SizedBox(width: 5),
                           Text(item.isELearning
                               ? 'Tham gia trực tuyến'
@@ -614,7 +614,7 @@ class _MakeupSessionScreenState extends State<MakeupSessionScreen> {
                                   ? 'Xem chi tiết'
                                   : widget.currentRole.canIssueQR
                                       ? 'Mở QR điểm danh'
-                                      : 'Điểm danh QR', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: readOnly ? const Color(0xFF334155) : Colors.white)),
+                                      : 'Điểm danh QR', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: readOnly ? D.primary : Colors.white)),
                         ]),
                       ),
                     ),
