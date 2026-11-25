@@ -827,7 +827,9 @@ class AppState extends ChangeNotifier {
     backendRole = (user['role'] as String?) ?? 'member';
     backendMemberId = (user['member_id'] as num?)?.toInt();
     backendUserName = (user['full_name'] as String?)?.trim().isNotEmpty == true ? user['full_name'] as String : null;
-    await _syncFromBackend();
+    // Xác thực xong là trả về ngay — phần đồng bộ 8 request chạy NỀN song song,
+    // màn hình cập nhật dần khi dữ liệu về (trước đây chờ tuần tự ~15s mới hiện "thành công")
+    unawaited(_syncFromBackend());
     return backendRole!;
   }
 
@@ -881,10 +883,24 @@ class AppState extends ChangeNotifier {
     if (!api.hasToken) return;
     backendLive = true;
     try {
+      // 8 request chạy SONG SONG — tổng thời gian = request chậm nhất (~3-4s)
+      // thay vì cộng dồn tuần tự (~15s). Riêng phần nào lỗi không phá phần khác.
+      final r = await Future.wait<dynamic?>([
+        _getOrNull('/auth/me'),
+        _getOrNull('/members'),
+        _getOrNull('/sessions'),
+        _getOrNull('/requests'),
+        _getOrNull('/ward/dashboard'),
+        _getOrNull('/ward/activities'),
+        _getOrNull('/rewards/vouchers'),
+        _getOrNull('/social/posts'),
+      ]);
+      final me = r[0]; final mems = r[1]; final sess = r[2]; final reqs = r[3];
+      final dash = r[4]; final acts = r[5]; final vouch = r[6]; final posts = r[7];
+
       // 0. Hồ sơ cá nhân (mọi vai trò): đồng bộ điểm/thành viên thật từ server —
       //    quan trọng với Đoàn viên vì /members bị RBAC chặn (không được dùng mock)
-      try {
-        final me = await api.get('/auth/me') as Map;
+      if (me is Map) {
         final mem = me['member'];
         if (mem is Map) {
           final points = _intOf(mem['points']);
@@ -902,66 +918,60 @@ class AppState extends ChangeNotifier {
             }
           }
         }
-      } on ApiException catch (_) {/* bỏ qua — dùng dữ liệu hiện có */}
+      }
 
       // 1. Hồ sơ đoàn viên (bí thư/phường có quyền; đoàn viên giữ dữ liệu mock)
-      try {
-        final mems = await api.get('/members') as List;
-        if (mems.isNotEmpty) {
-          members = mems.map<Member>(_mapMember).toList();
-        }
-      } on ApiException catch (_) {/* đoàn viên bị chặn — dùng mock */}
+      if (mems is List && mems.isNotEmpty) {
+        members = mems.map<Member>(_mapMember).toList();
+      }
 
       // 2. Buổi sinh hoạt
-      try {
-        final sess = await api.get('/sessions') as List;
+      if (sess is List) {
         _mapSessions(sess.cast<Map>());
-      } on ApiException catch (e) {
-        showToast('Buổi sinh hoạt: ${e.message}');
       }
 
       // 3. Đơn xin phép / sinh hoạt bù
-      try {
-        final reqs = await api.get('/requests') as List;
+      if (reqs is List) {
         makeupRequests = reqs.map<MakeupRequest>(_mapRequest).toList();
-      } on ApiException catch (_) {}
+      }
 
       // 4. Dashboard phường (chỉ cán bộ phường)
-      try {
-        final dash = await api.get('/ward/dashboard');
-        _mapWard(dash as Map);
-      } on ApiException catch (_) {}
+      if (dash is Map) {
+        _mapWard(dash);
+      }
 
       // 5. Hoạt động → danh mục đăng ký
-      try {
-        final acts = await api.get('/ward/activities') as List;
+      if (acts is List) {
         _mapActivities(acts);
-      } on ApiException catch (_) {}
+      }
 
       // 6. Voucher
-      try {
-        final vs = await api.get('/rewards/vouchers') as List;
-        if (vs.isNotEmpty) {
-          rewardItems = vs.map<RewardItem>(_mapVoucher).toList();
-        }
-      } on ApiException catch (_) {}
+      if (vouch is List && vouch.isNotEmpty) {
+        rewardItems = vouch.map<RewardItem>(_mapVoucher).toList();
+      }
 
       // 7. Bảng tin
-      try {
-        final posts = await api.get('/social/posts') as List;
-        if (posts.isNotEmpty) {
-          socialPosts = posts.map<SocialPost>(_mapPost).toList();
-        }
-      } on ApiException catch (_) {}
+      if (posts is List && posts.isNotEmpty) {
+        socialPosts = posts.map<SocialPost>(_mapPost).toList();
+      }
 
       auditLogs.insert(0, AuditLog(id: 'log-sync-${DateTime.now().millisecondsSinceEpoch}', actor: 'Hệ thống', action: 'Đồng bộ dữ liệu từ máy chủ (backend Vòng 2)', time: 'Vừa xong'));
-    } on ApiException catch (e) {
-      showToast('Không đồng bộ được dữ liệu: ${e.message}');
     } catch (e) {
       backendLive = false;
       showToast('Máy chủ không phản hồi — chạy chế độ dữ liệu mẫu. ($e)');
     } finally {
       notifyListeners();
+    }
+  }
+
+  /// GET im lặng: lỗi trả null thay vì ném — để đồng bộ song song không vỡ cả cụm
+  Future<dynamic?> _getOrNull(String path) async {
+    try {
+      return await api.get(path);
+    } on ApiException {
+      return null;
+    } catch (_) {
+      return null;
     }
   }
 
