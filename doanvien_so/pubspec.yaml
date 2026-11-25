@@ -1,7 +1,7 @@
 name: doanvien_so
 description: "Doan Vien So - Dong Nai (Hackathon Round 1 MVP)"
 publish_to: "none"
-version: 2.5.0+5
+version: 2.6.0+6
 
 environment:
   sdk: ">=3.5.0 <4.0.0"
