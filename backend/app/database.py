@@ -21,9 +21,13 @@ def migrate_db():
     with engine.begin() as conn:
         if engine.dialect.name == "postgresql":
             conn.execute(text("ALTER TABLE post ADD COLUMN IF NOT EXISTS activity_id INTEGER"))
+            conn.execute(text("ALTER TABLE post ADD COLUMN IF NOT EXISTS image_data TEXT"))
+            conn.execute(text("ALTER TABLE post ADD COLUMN IF NOT EXISTS image_mime TEXT"))
         else:
             try:
                 conn.execute(text("ALTER TABLE post ADD COLUMN activity_id INTEGER"))
+                conn.execute(text("ALTER TABLE post ADD COLUMN image_data TEXT"))
+                conn.execute(text("ALTER TABLE post ADD COLUMN image_mime TEXT"))
             except Exception:
                 pass  # cột đã tồn tại
         # Đổi bối cảnh demo: Phường Tam Hiệp (TP. Biên Hòa cũ) → Phường Trấn Biên

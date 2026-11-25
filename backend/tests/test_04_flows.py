@@ -212,3 +212,42 @@ class TestSocial:
         assert client.delete(f"/social/posts/{pid}", headers=auth_headers(client, "secretary")).status_code == 200
         ids = [p["id"] for p in client.get("/social/posts").json()]
         assert pid not in ids
+
+
+class TestUploadAnhBaiDang:
+    """Đăng bài kèm ảnh thật (base64) — lưu DB, phục vụ lại bytes qua GET image."""
+
+    def _login(self, client):
+        return auth_headers(client, "member")
+
+    def test_01_dang_bai_kem_anh(self, client):
+        h = self._login(client)
+        tiny_png = ("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJ"
+                    "AAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==")
+        r = client.post("/social/posts", headers=h, json={"content": "Bài kèm ảnh", "image": tiny_png, "mime": "image/png"})
+        assert r.status_code == 200 and r.json()["has_image"] is True
+        pid = r.json()["id"]
+        # ảnh phục vụ lại đúng loại nội dung
+        r2 = client.get(f"/social/posts/{pid}/image")
+        assert r2.status_code == 200 and r2.headers["content-type"].startswith("image/png") and r2.content
+        # list posts đánh dấu has_image
+        posts = client.get("/social/posts").json()
+        assert next(p for p in posts if p["id"] == pid)["has_image"] is True
+
+    def test_02_bai_khong_anh(self, client):
+        h = self._login(client)
+        r = client.post("/social/posts", headers=h, json={"content": "Bài không ảnh"})
+        pid = r.json()["id"]
+        assert r.json()["has_image"] is False
+        assert client.get(f"/social/posts/{pid}/image").status_code == 404
+
+    def test_03_anh_qua_lon_bi_choi(self, client):
+        h = self._login(client)
+        big = "A" * 4_500_000
+        r = client.post("/social/posts", headers=h, json={"content": "x", "image": big})
+        assert r.status_code == 413
+
+    def test_04_base64_sai_bi_choi(self, client):
+        h = self._login(client)
+        r = client.post("/social/posts", headers=h, json={"content": "x", "image": "không-phải-base64!!"})
+        assert r.status_code == 400

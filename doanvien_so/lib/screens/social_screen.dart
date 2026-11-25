@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import '../data/mock_data.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../state/app_state.dart';
 
 import '../ui.dart';
@@ -20,6 +24,9 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
   String selectedEventTag = 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên';
   String? selectedImageKey = '1';
   bool showImagePicker = false;
+  // Ảnh THẬT người dùng chọn từ máy (thư viện / chụp mới) — gửi base64 lên server
+  XFile? pickedImage;
+  final ImagePicker _picker = ImagePicker();
   bool attachEventCard = true;
   String filterMode = 'all'; // all | events_only | mine
   String? openCommentPostId = 'post-event-1';
@@ -239,8 +246,31 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
                       ),
                     ),
                   ],
-                  // Ảnh đính kèm (mock placeholder)
-                  if (selectedImageKey != null) ...[
+                  // Ảnh đính kèm — ảnh thật từ máy (ưu tiên) hoặc ảnh mẫu khi offline
+                  if (pickedImage != null) ...[
+                    const SizedBox(height: 12),
+                    Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.file(File(pickedImage!.path), height: 150, width: double.infinity, fit: BoxFit.cover),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: GestureDetector(
+                            onTap: () => setState(() => pickedImage = null),
+                            child: Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), shape: BoxShape.circle),
+                              child: const Icon(Icons.close_rounded, size: 16, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ] else if (selectedImageKey != null) ...[
                     const SizedBox(height: 12),
                     Stack(
                       children: [
@@ -305,30 +335,74 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
                   Row(
                     children: [
                       GestureDetector(
+                        onTap: () async {
+                          // Ảnh thật từ thư viện máy — tự nén (dưới 3MB)
+                          final x = await _picker.pickImage(source: ImageSource.gallery, maxWidth: 1080, imageQuality: 55);
+                          if (x != null) setState(() { pickedImage = x; showImagePicker = false; });
+                        },
+                        child: Container(
+                          height: 36,
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(color: D.light, borderRadius: BorderRadius.circular(12)),
+                          child: const Row(children: [
+                            Icon(Icons.photo_library_rounded, size: 15, color: D.primary),
+                            SizedBox(width: 5),
+                            Text('Thư viện', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: D.primary)),
+                          ]),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () async {
+                          // Chụp ảnh mới bằng camera
+                          final x = await _picker.pickImage(source: ImageSource.camera, maxWidth: 1080, imageQuality: 55);
+                          if (x != null) setState(() { pickedImage = x; showImagePicker = false; });
+                        },
+                        child: Container(
+                          height: 36,
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(color: D.light, borderRadius: BorderRadius.circular(12)),
+                          child: const Row(children: [
+                            Icon(Icons.photo_camera_rounded, size: 15, color: D.primary),
+                            SizedBox(width: 5),
+                            Text('Chụp ảnh', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: D.primary)),
+                          ]),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
                         onTap: () => setState(() => showImagePicker = !showImagePicker),
                         child: Container(
                           height: 36,
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           decoration: BoxDecoration(color: D.light, borderRadius: BorderRadius.circular(12)),
                           child: const Row(children: [
-                            Icon(Icons.image_rounded, size: 15, color: D.primary),
+                            Icon(Icons.auto_awesome_rounded, size: 15, color: D.primary),
                             SizedBox(width: 5),
-                            Text('Thư viện', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: D.primary)),
+                            Text('Mẫu', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: D.primary)),
                           ]),
                         ),
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (postCtrl.text.trim().isEmpty) {
                             widget.state.showToast('Vui lòng nhập nội dung bài viết!');
                             return;
                           }
                           final dayEntry = scheduleWeekDays.firstWhere((d) => d['key'] == eventDateStr, orElse: () => {'key': '', 'label': 'CN', 'dayNum': ''});
-                          widget.state.createSocialPost(
+                          // Ảnh thật từ máy → nén sẵn (maxWidth 1080, chất lượng 55%) → base64 gửi server
+                          String? imageB64;
+                          if (pickedImage != null) {
+                            final bytes = await pickedImage!.readAsBytes();
+                            imageB64 = base64Encode(bytes);
+                          }
+                          await widget.state.createSocialPost(
                             content: postCtrl.text.trim(),
                             eventTag: attachEventCard ? eventTitle : selectedEventTag,
-                            imageUrl: selectedImageKey, // String?
+                            imageUrl: pickedImage == null ? selectedImageKey : null,
+                            imageBase64: imageB64,
+                            imageMime: 'image/jpeg',
                             authorName: author.name,
                             authorRole: author.role,
                             isEventPost: attachEventCard,
@@ -351,6 +425,7 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
                           setState(() {
                             postCtrl.clear();
                             composerOpen = false;
+                            pickedImage = null;
                           });
                           widget.state.showToast(attachEventCard ? 'Đã đăng bài phát động sự kiện kèm nút Đăng ký tham dự!' : 'Đã đăng bài viết lên Bảng tin (+5đ)!');
                         },
@@ -433,6 +508,23 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
       '3': (Icons.groups_rounded, 'Sinh hoạt Chi đoàn'),
       '4': (Icons.devices_rounded, 'Hỗ trợ VNeID'),
     };
+    // Ảnh thật: URL server (bài đã đồng bộ) hoặc data URI (bài vừa đăng)
+    if (key.startsWith('http') || key.startsWith('data:')) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.network(
+          key,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => Container(
+            width: width, height: height,
+            decoration: BoxDecoration(color: const Color(0xFF2024B8), borderRadius: BorderRadius.circular(12)),
+            child: const Icon(Icons.broken_image_rounded, color: Colors.white, size: 28),
+          ),
+        ),
+      );
+    }
     final (icon, label) = presets[key] ?? presets['1']!;
     return Container(
       width: width,

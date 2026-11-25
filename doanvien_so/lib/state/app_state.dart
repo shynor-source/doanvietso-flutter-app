@@ -1142,7 +1142,7 @@ class AppState extends ChangeNotifier {
       eventSchedule: _scheduleFromActivity(j['activity']),
       createdAt: _fmtDate('${j['created_at']}'),
       content: (j['content'] as String?) ?? '',
-      imageUrl: null,
+      imageUrl: j['has_image'] == true ? '$kApiBaseUrl/social/posts/${j['id']}/image' : null,
       likesCount: 0,
       likedByMe: false,
       comments: [],  // mutable — const [] làm nút gửi bình luận crash im lặng
@@ -1294,10 +1294,28 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  SocialPost createSocialPost({required String content, required String eventTag, required String? imageUrl, required String authorName, required String authorRole, bool isEventPost = false, ScheduleItem? eventSchedule}) {
+  Future<SocialPost> createSocialPost({required String content, required String eventTag, required String? imageUrl, required String authorName, required String authorRole, bool isEventPost = false, ScheduleItem? eventSchedule, String? imageBase64, String? imageMime}) async {
+    final hasRealImage = imageBase64 != null && imageBase64.length < 4000000;
     if (useApi) {
-      _apiFire(api.post('/social/posts', {'content': content, 'is_event': isEventPost}));
+      final body = <String, dynamic>{'content': content, 'is_event': isEventPost};
+      if (hasRealImage) {
+        body['image'] = imageBase64;
+        body['mime'] = imageMime ?? 'image/jpeg';
+      }
+      if (hasRealImage) {
+        // Có ảnh thật: chờ gửi lên server (ảnh lớn hơn 1 tí, cần biết kết quả)
+        try {
+          await api.post('/social/posts', body);
+        } on ApiException catch (e) {
+          showToast(e.message);
+        } catch (_) {
+          showToast('Chưa đồng bộ được ảnh với máy chủ — bài lưu cục bộ.');
+        }
+      } else {
+        _apiFire(api.post('/social/posts', body));
+      }
     }
+    final localImageUrl = hasRealImage ? 'data:${imageMime ?? 'image/jpeg'};base64,$imageBase64' : imageUrl;
     final post = SocialPost(
       id: 'post-${DateTime.now().millisecondsSinceEpoch}',
       authorId: defaultCurrentMemberId,

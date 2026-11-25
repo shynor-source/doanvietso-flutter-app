@@ -1,5 +1,12 @@
-"""Bảng tin: mọi vai trò đăng bài/bình luận — chỉ cán bộ được ghim/xóa (moderate)."""
+"""Bảng tin: mọi vai trò đăng bài/bình luận — chỉ cán bộ được ghim/xóa (moderate).
+
+Ảnh đính kèm bài đăng: app gửi base64 trong JSON (không cần multipart), server lưu
+trong DB (bền qua restart trên Render free) và phục vụ lại qua GET /social/posts/{id}/image.
+"""
+import base64
+
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import Response
 from pydantic import BaseModel
 from sqlmodel import Session as DBSession, select
 
@@ -9,11 +16,15 @@ from ..models import Activity, AuditLog, Comment, Post, User, utcnow
 
 router = APIRouter(prefix="/social", tags=["social"])
 
+MAX_IMAGE_B64 = 4_000_000  # ~3MB ảnh gốc sau base64 — chặn upload khổng lồ
+
 
 class PostIn(BaseModel):
     content: str
     is_event: bool = False
     activity_id: int | None = None
+    image: str | None = None  # base64 (không kèm tiền tố data:)
+    mime: str | None = "image/jpeg"
 
 
 class CommentIn(BaseModel):
@@ -32,7 +43,7 @@ def list_posts(db: DBSession = Depends(get_session)):
         out.append({"id": p.id, "author_id": p.author_id, "author_name": author.full_name if author else "Ẩn danh",
                     "role": author.role if author else "member", "content": p.content, "is_event": p.is_event,
                     "is_pinned": p.is_pinned, "created_at": p.created_at, "comments": len(comments),
-                    "activity_id": p.activity_id,
+                    "activity_id": p.activity_id, "has_image": p.image_data is not None,
                     "activity": ({"id": activity.id, "title": activity.title, "category": activity.category,
                                   "starts_at": activity.starts_at, "location": activity.location,
                                   "points": activity.points, "organizer": activity.organizer} if activity else None)})
@@ -41,11 +52,36 @@ def list_posts(db: DBSession = Depends(get_session)):
 
 @router.post("/posts", summary="Đăng bài (mọi vai trò)")
 def create_post(body: PostIn, user: User = Depends(get_current_user), db: DBSession = Depends(get_session)):
-    p = Post(author_id=user.id or 0, content=body.content, is_event=body.is_event, activity_id=body.activity_id)
+    image_data = image_mime = None
+    if body.image:
+        if len(body.image) > MAX_IMAGE_B64:
+            raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, "Ảnh quá lớn (tối đa ~3MB). Hãy chọn ảnh gọn hơn.")
+        try:
+            base64.b64decode(body.image, validate=True)  # kiểm tra base64 hợp lệ
+        except Exception:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, "Dữ liệu ảnh không hợp lệ.")
+        image_data, image_mime = body.image, (body.mime or "image/jpeg")
+    p = Post(author_id=user.id or 0, content=body.content, is_event=body.is_event, activity_id=body.activity_id,
+             image_data=image_data, image_mime=image_mime)
     db.add(p)
     db.commit()
     db.refresh(p)
-    return {"ok": True, "id": p.id}
+    db.add(AuditLog(actor=user.full_name, action="Đăng bài lên Bảng tin" + (" (kèm ảnh)" if image_data else "")))
+    db.commit()
+    return {"ok": True, "id": p.id, "has_image": image_data is not None}
+
+
+@router.get("/posts/{post_id}/image", summary="Ảnh đính kèm của bài đăng (công khai, trả bytes ảnh)")
+def get_post_image(post_id: int, db: DBSession = Depends(get_session)):
+    p = db.get(Post, post_id)
+    if p is None or not p.image_data:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Bài viết không có ảnh.")
+    try:
+        raw = base64.b64decode(p.image_data)
+    except Exception:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Ảnh bị hỏng.")
+    return Response(content=raw, media_type=p.image_mime or "image/jpeg",
+                    headers={"Cache-Control": "public, max-age=86400"})
 
 
 @router.post("/posts/{post_id}/comment", summary="Bình luận (mọi vai trò)")

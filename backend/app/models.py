@@ -132,13 +132,16 @@ class Registration(SQLModel, table=True):
 
 
 class Post(SQLModel, table=True):
-    """Bảng tin — cán bộ được ghim / xóa."""
+    """Bảng tin — cán bộ được ghim / xóa. Ảnh đính kèm lưu base64 trong DB
+    (Render free tier có ổ đĩa tạm — lưu DB mới bền qua restart)."""
     id: Optional[int] = Field(default=None, primary_key=True)
     author_id: int = Field(foreign_key="user.id")
     content: str
     is_event: bool = False
     is_pinned: bool = False
     activity_id: Optional[int] = Field(default=None, foreign_key="activity.id", index=True)
+    image_data: Optional[str] = None  # base64 của ảnh
+    image_mime: Optional[str] = None  # image/jpeg | image/png
     created_at: datetime = Field(default_factory=utcnow)
 
 
