@@ -509,7 +509,24 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
       '4': (Icons.devices_rounded, 'Hỗ trợ VNeID'),
     };
     // Ảnh thật: URL server (bài đã đồng bộ) hoặc data URI (bài vừa đăng)
-    if (key.startsWith('http') || key.startsWith('data:')) {
+    if (key.startsWith('data:')) {
+      final b64 = key.split(',').last;
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.memory(
+          base64Decode(b64),
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => Container(
+            width: width, height: height,
+            decoration: BoxDecoration(color: const Color(0xFF2024B8), borderRadius: BorderRadius.circular(12)),
+            child: const Icon(Icons.broken_image_rounded, color: Colors.white, size: 28),
+          ),
+        ),
+      );
+    }
+    if (key.startsWith('http')) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Image.network(

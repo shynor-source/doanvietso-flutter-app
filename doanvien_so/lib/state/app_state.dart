@@ -1333,7 +1333,7 @@ class AppState extends ChangeNotifier {
       eventSchedule: eventSchedule,
       createdAt: 'Vừa xong',
       content: content,
-      imageUrl: imageUrl,
+      imageUrl: localImageUrl,
       likesCount: 1,
       likedByMe: true,
       comments: [],
