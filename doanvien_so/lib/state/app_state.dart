@@ -1081,6 +1081,29 @@ class AppState extends ChangeNotifier {
         available: _intOf(j['stock']),
       );
 
+  /// Ghép sự kiện (activity) đính kèm trong bài từ server → ScheduleItem cho thẻ "Đăng ký tham dự".
+  ScheduleItem? _scheduleFromActivity(dynamic act) {
+    if (act == null) return null;
+    final starts = DateTime.tryParse('${act['starts_at']}')?.toLocal();  // server trả UTC → đổi về giờ máy (VN = UTC+7)
+    const days = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+    final d = starts ?? DateTime.now();
+    final hh = d.hour.toString().padLeft(2, '0');
+    final mm = d.minute.toString().padLeft(2, '0');
+    return ScheduleItem(
+      id: 'act-${act['id']}',
+      title: (act['title'] as String?) ?? 'Sự kiện',
+      category: (act['category'] as String?) ?? 'Sự kiện Đoàn',
+      dateStr: '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}/${d.year}',
+      dayOfWeek: days[d.weekday % 7],
+      timeSlot: '$hh:$mm',
+      room: (act['location'] as String?) ?? '',
+      organizer: (act['organizer'] as String?) ?? '',
+      format: 'Trực tiếp • Điểm danh QR',
+      points: '+${act['points'] ?? 0} điểm',
+      isELearning: false,
+    );
+  }
+
   SocialPost _mapPost(dynamic j) {
     final role = (j['role'] as String?) ?? 'member';
     final roleLabel = switch (role) {
@@ -1103,7 +1126,7 @@ class AppState extends ChangeNotifier {
       verifiedParticipant: false,
       registeredCount: 0,
       registeredByMe: false,
-      eventSchedule: null,
+      eventSchedule: _scheduleFromActivity(j['activity']),
       createdAt: _fmtDate('${j['created_at']}'),
       content: (j['content'] as String?) ?? '',
       imageUrl: null,
@@ -1224,6 +1247,11 @@ class AppState extends ChangeNotifier {
     post.registeredCount++;
     notifications['member']!.insert(0, AppNotification(id: 'noti-evreg-${DateTime.now().millisecondsSinceEpoch}', title: 'Đã thêm vào Lịch: ${ev.title}', content: '${ev.dateStr} (${ev.timeSlot}) tại ${ev.room}. Hệ thống sẽ nhắc trước giờ diễn ra.', time: 'Vừa xong', type: 'event', unread: true));
     auditLogs.insert(0, AuditLog(id: 'log-evreg-${DateTime.now().millisecondsSinceEpoch}', actor: currentMember.name, action: 'Đăng ký tham dự sự kiện "${ev.title}" từ Bảng tin', time: 'Vừa xong'));
+    // Ghi đăng ký xuống server (bài sự kiện đồng bộ từ backend)
+    final aid = _backendIdOf(ev.id);
+    if (useApi && aid != null) {
+      _apiFire(api.post('/rewards/activities/$aid/register'));
+    }
     notifyListeners();
     return {'ok': true};
   }
