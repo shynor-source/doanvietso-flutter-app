@@ -33,6 +33,8 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
   @override
   void initState() {
     super.initState();
+    // Chỉ cán bộ Đoàn mới được phát động sự kiện (RBAC: member không thấy hàng toggle)
+    attachEventCard = widget.currentRole == AppRole.wardOfficer;
     // Preselect từ màn khác (chia sẻ sau điểm danh/minh chứng)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final pre = widget.state.preselectedSocialEvent;
@@ -63,7 +65,7 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
     final state = widget.state;
     return switch (widget.currentRole) {
       AppRole.secretary => (name: 'Nguyễn Văn An', role: 'Bí thư Chi đoàn Khu phố 5'),
-      AppRole.wardOfficer => (name: 'Phan Thị Bích Thảo', role: 'Bí thư Đoàn Phường Tam Hiệp'),
+      AppRole.wardOfficer => (name: state.backendUserName ?? 'Phan Thị Bích Thảo', role: 'Cán bộ Đoàn Phường Tam Hiệp'),
       AppRole.member => (name: state.currentMember.name, role: 'Đoàn viên • ${state.currentMember.branchName}'),
     };
   }
@@ -79,7 +81,6 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
     final state = widget.state;
     final author = authorProfile;
     final isOfficer = widget.currentRole != AppRole.member;
-    attachEventCard = isOfficer;
 
     final filteredPosts = state.socialPosts.where((p) {
       if (filterMode == 'events_only') return p.isEventPost;
@@ -164,9 +165,9 @@ class _SocialFeedScreenState extends State<SocialFeedScreen> {
                       focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: D.primary, width: 1.5)),
                     ),
                   ),
-                  // Toggle kèm thẻ sự kiện
-                  const SizedBox(height: 10),
-                  Container(
+                  // Toggle kèm thẻ sự kiện (chỉ cán bộ Đoàn; member ẩn hoàn toàn)
+                  if (isOfficer) const SizedBox(height: 10),
+                  if (isOfficer) Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(color: D.grayBg, borderRadius: BorderRadius.circular(12)),
                     child: Row(

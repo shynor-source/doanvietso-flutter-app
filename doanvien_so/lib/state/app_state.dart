@@ -813,6 +813,7 @@ class AppState extends ChangeNotifier {
   bool backendLive = false;
   int? backendMemberId; // id hồ sơ đoàn viên gắn với tài khoản đang đăng nhập
   String? backendRole;  // role trả về từ máy chủ
+  String? backendUserName; // họ tên thật của tài khoản (user.full_name) — dùng làm chữ ký báo cáo
   final Map<String, String> backendBranchIdByName = {}; // tên chi đoàn (local) → branch_id server
 
   /// Đang dùng API thật (có token, server reachable, không bật chế độ offline demo)
@@ -825,6 +826,7 @@ class AppState extends ChangeNotifier {
     final user = data['user'] as Map;
     backendRole = (user['role'] as String?) ?? 'member';
     backendMemberId = (user['member_id'] as num?)?.toInt();
+    backendUserName = (user['full_name'] as String?)?.trim().isNotEmpty == true ? user['full_name'] as String : null;
     await _syncFromBackend();
     return backendRole!;
   }
@@ -834,6 +836,7 @@ class AppState extends ChangeNotifier {
     backendLive = false;
     backendMemberId = null;
     backendRole = null;
+    backendUserName = null;
   }
 
   String _fmtDate(String iso) {

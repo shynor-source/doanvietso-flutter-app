@@ -41,7 +41,7 @@ class _UtilitiesMenuScreenState extends State<UtilitiesMenuScreen> {
     final member = state.currentMember;
     final (name, subtitle, badge) = switch (widget.currentRole) {
       AppRole.secretary => ('Nguyễn Văn An', 'Bí thư Chi đoàn • Khu phố 5', '${state.members.length} ĐV'),
-      AppRole.wardOfficer => ('Phan Thị Bích Thảo', 'Cán bộ Đoàn • Phường Tam Hiệp', '12 Chi đoàn'),
+      AppRole.wardOfficer => (state.backendUserName ?? 'Phan Thị Bích Thảo', 'Cán bộ Đoàn • Phường Tam Hiệp', '12 Chi đoàn'),
       AppRole.member => (member.name, 'Đoàn viên • ${member.branchName}', '${state.userPoints} đ'),
     };
 

@@ -410,8 +410,8 @@ class _SystemAdminSheetState extends State<_SystemAdminSheet> {
     final state = widget.state;
     final member = state.currentMember;
     final Map<String, String> profile = switch (widget.role) {
-      AppRole.secretary => {'name': 'Nguyễn Văn An', 'code': 'CB-KP5-2026', 'roleName': 'Bí thư Chi đoàn Khu phố 5', 'unit': 'Phường Tam Hiệp, TP. Biên Hòa, Tỉnh Đồng Nai', 'phone': '0912.345.678', 'joinDate': '26/03/2017'},
-      AppRole.wardOfficer => {'name': 'Phan Thị Bích Thảo', 'code': 'CB-PHUONG-01', 'roleName': 'Bí thư Đoàn Phường Tam Hiệp', 'unit': 'BCH Đoàn Phường Tam Hiệp (12 Chi đoàn)', 'phone': '0908.123.999', 'joinDate': '26/03/2015'},
+      AppRole.secretary => {'name': state.backendUserName ?? 'Nguyễn Văn An', 'code': 'CB-KP5-2026', 'roleName': 'Bí thư Chi đoàn Khu phố 5', 'unit': 'Phường Tam Hiệp, TP. Biên Hòa, Tỉnh Đồng Nai', 'phone': '0912.345.678', 'joinDate': '26/03/2017'},
+      AppRole.wardOfficer => {'name': state.backendUserName ?? 'Phan Thị Bích Thảo', 'code': 'CB-PHUONG-01', 'roleName': 'Cán bộ Đoàn Phường Tam Hiệp', 'unit': 'BCH Đoàn Phường Tam Hiệp (12 Chi đoàn)', 'phone': '0908.123.999', 'joinDate': '26/03/2015'},
       AppRole.member => {'name': member.name, 'code': member.memberCode, 'roleName': 'Đoàn viên • Công nhân KCN', 'unit': '${member.branchName} • ${member.workplace}', 'phone': member.phone, 'joinDate': member.joinDate},
     };
     final branches = state.wardDataByMonth['11']!.branchesRank;

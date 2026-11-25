@@ -450,7 +450,7 @@ final wardDataByMonth = <String, MonthWardData>{
 };
 
 const wardOfficerName = 'Phan Thị Bích Thảo';
-const wardOfficerRole = 'Bí thư Đoàn Phường Tam Hiệp';
+const wardOfficerRole = 'Cán bộ Đoàn Phường Tam Hiệp';
 const wardOfficerPhone = '0908.123.999';
 const wardDataName = 'Đoàn Thanh niên Phường Tam Hiệp';
 
@@ -535,7 +535,7 @@ final scheduleCatalog = [
 
 final initialSocialPosts = [
   SocialPost(
-    id: 'post-event-1', authorId: 'ward-01', authorName: 'Phan Thị Bích Thảo', authorRole: 'Bí thư Đoàn Phường Tam Hiệp • Cán bộ phát động', authorAvatar: 'Phan Thị Bích Thảo', branchName: 'Đoàn Phường Tam Hiệp', category: 'event', eventTag: 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên', isEventPost: true, verifiedOfficer: true, verifiedParticipant: true, registeredCount: 34, registeredByMe: false,
+    id: 'post-event-1', authorId: 'ward-01', authorName: 'Phan Thị Bích Thảo', authorRole: 'Cán bộ Đoàn Phường Tam Hiệp • Cán bộ phát động', authorAvatar: 'Phan Thị Bích Thảo', branchName: 'Đoàn Phường Tam Hiệp', category: 'event', eventTag: 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên', isEventPost: true, verifiedOfficer: true, verifiedParticipant: true, registeredCount: 34, registeredByMe: false,
     eventSchedule: ScheduleItem(id: 'ev-soc-1', title: 'Chiến dịch Mùa Đông Ấm & Hỗ trợ Thanh niên', category: 'Sự kiện Đoàn', dateStr: '29/11/2026', dayOfWeek: 'CN', timeSlot: '07:30 - 11:00', room: 'Nhà văn hóa KP5 & Khu vực Tam Hiệp', organizer: 'BCH Đoàn Phường Tam Hiệp', format: 'Trực tiếp • Điểm danh QR', points: '+25 điểm', isELearning: false),
     createdAt: '30 phút trước',
     content: 'Phát động Chiến dịch Mùa Đông Ấm tháng 11/2026! Kính mời các đồng chí đoàn viên đăng ký tham dự trực tiếp ngay bên dưới để hệ thống tự động đồng bộ vào Lịch cá nhân.',

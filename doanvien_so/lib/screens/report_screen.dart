@@ -271,7 +271,7 @@ class _SecretaryReportViewState extends State<SecretaryReportView> {
                                 children: [
                                   const Text('TM. BCH CHI ĐOÀN KP5', style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w800, color: Color(0xFF475569))),
                                   const SizedBox(height: 10),
-                                  const Text('Nguyễn Văn An', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF0F172A))),
+                                  Text(state.backendUserName ?? 'Nguyễn Văn An', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF0F172A))),
                                   const Row(children: [
                                     Icon(Icons.verified_user_rounded, size: 13, color: D.greenDark),
                                     SizedBox(width: 4),
