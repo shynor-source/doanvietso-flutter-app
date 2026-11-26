@@ -68,14 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return AppRole.member;
   }
 
-  /// Gợi ý OTP: hiện mã demo nếu được truyền khi build, không thì gợi ý chung.
-  String demoOtpHint() {
-    if (otpCode.trim().isEmpty) {
-      return 'Mã OTP được cấp cho tài khoản demo (production gửi OTP qua SMS/Zalo).';
-    }
-    return 'Bản demo: mã OTP cố định $otpCode. Production gửi OTP qua SMS/Zalo.';
-  }
-
   /// Đăng nhập qua backend thật (OTP demo truyền qua --dart-define khi build).
   /// Thành công → vai trò do máy chủ quyết định (RBAC) và tự đồng bộ dữ liệu.
   /// Lỗi kết nối → fallback chế độ demo dữ liệu mẫu.
@@ -197,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 12),
                     // OTP
-                    Text('Mã xác thực OTP', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF334155))),
+                    const Text('Mã xác thực OTP', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF334155))),
                     const SizedBox(height: 4),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -236,13 +228,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    Row(
+                    const Row(
                       children: [
-                        const Icon(Icons.info_outline_rounded, size: 12, color: Color(0xFF94A3B8)),
-                        const SizedBox(width: 4),
+                        Icon(Icons.sms_outlined, size: 13, color: Color(0xFF94A3B8)),
+                        SizedBox(width: 5),
                         Expanded(
-                          child: Text(demoOtpHint(),
-                              style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8))),
+                          child: Text('Mã xác thực được gửi qua SMS/Zalo tới số điện thoại của bạn.',
+                              style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8))),
                         ),
                       ],
                     ),
@@ -255,23 +247,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
-              // RBAC note
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                decoration: BoxDecoration(color: D.light, borderRadius: BorderRadius.circular(14)),
-                child: Row(
-                  children: [
-                    const Icon(Icons.verified_user_rounded, size: 16, color: D.primary),
-                    const SizedBox(width: 10),
-                    const Expanded(
-                      child: Text('Phân quyền RBAC: vai trò được gán theo tài khoản trên máy chủ — không thể tự chọn.',
-                          style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: D.primary)),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               Center(
                 child: Container(width: 128, height: 4, decoration: BoxDecoration(color: const Color(0xFFCBD5E1), borderRadius: BorderRadius.circular(4))),
               ),
