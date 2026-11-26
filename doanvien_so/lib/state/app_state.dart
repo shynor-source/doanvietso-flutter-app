@@ -158,6 +158,38 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ===== Quản trị tài khoản (Cán bộ Đoàn phường) =====
+  /// Danh sách toàn bộ tài khoản hệ thống (yêu cầu quyền user:manage phía server).
+  Future<List<Map<String, dynamic>>> fetchBackendUsers() async {
+    try {
+      final r = await api.get('/admin/users');
+      final list = (r['users'] as List<dynamic>? ?? []).whereType<Map<String, dynamic>>().toList();
+      return list;
+    } on ApiException catch (e) {
+      showToast(e.message);
+      rethrow;
+    } catch (_) {
+      showToast('Không tải được danh sách tài khoản từ máy chủ.');
+      rethrow;
+    }
+  }
+
+  /// Đổi vai trò một tài khoản (member / secretary / ward_officer).
+  /// Vai trò hiệu lực ngay trên máy chủ; người dùng đăng nhập lại để cập nhật giao diện.
+  Future<Map<String, dynamic>?> setUserRole(int userId, String role) async {
+    try {
+      final r = await api.patch('/admin/users/$userId/role', {'role': role});
+      showToast(r['note'] ?? 'Đã đổi vai trò.');
+      return r is Map<String, dynamic> ? r : null;
+    } on ApiException catch (e) {
+      showToast(e.message);
+      return null;
+    } catch (_) {
+      showToast('Không đổi được vai trò — kiểm tra kết nối.');
+      return null;
+    }
+  }
+
   void clearToast() {
     globalToast = null;
     notifyListeners();

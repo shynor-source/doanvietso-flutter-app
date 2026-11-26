@@ -4,6 +4,7 @@ import 'main.dart' show AppStateScope;
 import 'state/app_state.dart';
 import 'ui.dart';
 import 'components/modals.dart';
+import 'screens/admin_users_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/secretary_home.dart';
 import 'screens/member_home.dart';
@@ -31,6 +32,7 @@ const screenMakeup = 'makeup';
 const screenRewards = 'rewards';
 const screenSocial = 'social';
 const screenMenu = 'menu';
+const screenAdminUsers = 'admin_users';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -102,6 +104,10 @@ class _AppShellState extends State<AppShell> {
       if (target == 'scan_qr') {
         memberSubTab = 'scan';
         activeScreen = screenScanQr;
+        return;
+      }
+      if (target == 'admin_users') {
+        activeScreen = screenAdminUsers;
         return;
       }
       activeScreen = target;
@@ -208,6 +214,8 @@ class _AppShellState extends State<AppShell> {
         return (title: 'Báo cáo Đoàn vụ', subtitle: 'Thống kê & Xuất văn bản tự động', showBack: true);
       case screenWardRewards:
         return (title: 'Thi đua & Xếp hạng', subtitle: '12 Chi đoàn trực thuộc', showBack: true);
+      case screenAdminUsers:
+        return (title: 'Quản trị tài khoản', subtitle: 'Xem toàn bộ thành viên • đổi vai trò', showBack: true);
       case screenMakeup:
         return (title: 'Lịch hoạt động cá nhân', subtitle: 'Theo dõi lịch sinh hoạt & sự kiện đã đăng ký', showBack: true);
       case screenRewards:
@@ -273,6 +281,8 @@ class _AppShellState extends State<AppShell> {
         return WardDashboard(state: state, viewMode: 'overview');
       case screenWardBranches:
         return WardDashboard(state: state, viewMode: 'branches');
+      case screenAdminUsers:
+        return AdminUsersScreen(state: state);
       case screenWardReports:
         return WardDashboard(state: state, viewMode: 'reports');
       case screenWardRewards:

@@ -17,8 +17,8 @@ from .seed import seed
 from .models import QrToken, Session as SessionModel, utcnow
 
 from .routers import (
-    assistant_router, auth_router, members_router, requests_router, rewards_router,
-    sessions_router, social_router, ward_router,
+    admin_router, assistant_router, auth_router, members_router, requests_router,
+    rewards_router, sessions_router, social_router, ward_router,
 )
 
 
@@ -92,7 +92,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for r in (assistant_router, auth_router, sessions_router, members_router, requests_router, ward_router, rewards_router, social_router):
+for r in (admin_router, assistant_router, auth_router, sessions_router, members_router,
+          requests_router, ward_router, rewards_router, social_router):
     app.include_router(r.router)
 
 

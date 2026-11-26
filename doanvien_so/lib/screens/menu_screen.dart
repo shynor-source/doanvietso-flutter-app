@@ -75,6 +75,7 @@ class _UtilitiesMenuScreenState extends State<UtilitiesMenuScreen> {
         ('rewards', 'Thi đua toàn phường', 'Xét khen thưởng chi đoàn', Icons.workspace_premium_rounded, const Color(0xFFFFFBEB), const Color(0xFFB45309), () => widget.onNavigateScreen('rewards')),
         ('branches', 'Quản lý 12 Chi đoàn', 'Theo dõi cấp Phường/Xã', Icons.location_city_rounded, const Color(0xFFF0FDFA), const Color(0xFF0F766E), () => widget.onNavigateScreen('ward_branches')),
         ('ward_rank', 'Xếp hạng Chi đoàn', 'Thi đua toàn Phường', Icons.emoji_events_rounded, const Color(0xFFFFF7ED), const Color(0xFFC2410C), () => widget.onNavigateScreen('ward_rewards')),
+        ('admin_users', 'Quản trị tài khoản', 'Xem toàn bộ thành viên • đổi vai trò', Icons.admin_panel_settings_rounded, const Color(0xFFF5F3FF), const Color(0xFF6D28D9), () => widget.onNavigateScreen('admin_users')),
         ('reports', 'Báo cáo Đoàn vụ', 'Xuất văn bản tự động', Icons.table_chart_rounded, const Color(0xFFECFEFF), const Color(0xFF0E7490), () => widget.onNavigateScreen('ward_reports')),
       ],
     ];

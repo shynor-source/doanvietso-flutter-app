@@ -18,8 +18,7 @@ PERMISSIONS: dict[str, set[str]] = {
         "voucher:redeem",
         "post:create",
         "post:comment",
-    },
-    "secretary": {
+    },    "secretary": {
         "session:create", "session:update", "session:delete", "session:close",
         "qr:issue",
         "member:create", "member:update", "member:delete", "member:import",
@@ -34,6 +33,7 @@ PERMISSIONS: dict[str, set[str]] = {
         "reward:grant",
         "post:create", "post:comment", "post:moderate",
         "branch:view",
+        "user:manage",
     },
 }
 

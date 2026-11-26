@@ -249,6 +249,21 @@ KB = [
 
     # ===== RIÊNG CÁN BỘ ĐOÀN PHƯỜNG =====
     {
+        "id": "assistant_admin_users",
+        "title": "Quản trị tài khoản & phân quyền",
+        "roles": ["ward_officer"],
+        "nav": "admin_users",
+        "nav_label": "Mở màn Quản trị tài khoản",
+        "summary": "Xem toàn bộ tài khoản hệ thống và đổi vai trò (Đoàn viên ↔ Bí thư ↔ Cán bộ phường) — vai trò hiệu lực ngay trên máy chủ, mọi thay đổi ghi nhật ký.",
+        "steps": [
+            "Tab 'Tiện ích' → 'Quản trị tài khoản'",
+            "Tìm tài khoản theo tên / số điện thoại / vai trò",
+            "Bấm 'Đổi vai trò' → chọn vai trò mới → Xác nhận",
+            "Người dùng đăng nhập lại để cập nhật giao diện",
+        ],
+        "keywords": ["quản trị tài khoản", "đổi vai trò", "phân quyền", "nâng bí thư", "cấp quyền", "tài khoản", "thành viên"],
+    },
+    {
         "id": "assistant_ward_dash",
         "title": "Tổng hợp toàn phường (Dashboard)",
         "roles": ["ward_officer"],
@@ -327,6 +342,7 @@ NAV_LABELS = {
     "create_qr": "Tạo QR điểm danh", "members": "Danh sách đoàn viên", "reports": "Báo cáo",
     "ward_dash": "Tổng hợp phường", "ward_branches": "Quản lý Chi đoàn",
     "ward_reports": "Báo cáo Đoàn vụ", "ward_rewards": "Thi đua phường",
+    "admin_users": "Quản trị tài khoản",
 }
 
 
