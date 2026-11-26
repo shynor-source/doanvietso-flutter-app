@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../state/app_state.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../ui.dart';
 
 
@@ -551,7 +552,14 @@ class _CreateSessionQrScreenState extends State<CreateSessionQrScreen> {
                     height: 208,
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: D.primary.withValues(alpha: 0.2), width: 2)),
-                    child: CustomPaint(painter: _DynamicQrPainter(token: session.qrToken, seed: session.qrSeed)),
+                    child: QrImageView(
+                      data: session.qrToken,
+                      version: QrVersions.auto,
+                      eyeStyle: const QrEyeStyle(eyeShape: QrEyeShape.square, color: Color(0xFF161891)),
+                      dataModuleStyle: const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.square, color: Color(0xFF161891)),
+                      backgroundColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                    ),
                   ),
                   const SizedBox(height: 14),
                   Text.rich(TextSpan(style: const TextStyle(fontSize: 13, color: Color(0xFF475569)), children: [
@@ -737,52 +745,3 @@ class _CreateSessionQrScreenState extends State<CreateSessionQrScreen> {
 }
 
 /// QR động giả lập theo thiết kế (hash token + seed, vẽ ma ô)
-class _DynamicQrPainter extends CustomPainter {
-  final String token;
-  final int seed;
-  _DynamicQrPainter({required this.token, required this.seed});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final scale = size.width / 100;
-    Paint primary = Paint()..color = D.primary;
-    Paint white = Paint()..color = Colors.white;
-
-    void rect(double x, double y, double w, double h, double r, Paint p) {
-      canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(x * scale, y * scale, w * scale, h * scale), Radius.circular(r * scale)), p);
-    }
-
-    // 3 finder pattern
-    for (final (fx, fy) in [(5.0, 5.0), (69.0, 5.0), (5.0, 69.0)]) {
-      rect(fx, fy, 26, 26, 4, primary);
-      rect(fx + 4, fy + 4, 18, 18, 2, white);
-      rect(fx + 8, fy + 8, 10, 10, 1, primary);
-    }
-
-    // Data cells
-    int hashSeed = seed * 31;
-    for (int i = 0; i < token.length; i++) {
-      hashSeed += token.codeUnitAt(i) * (i + 3);
-    }
-    for (int row = 0; row < 11; row++) {
-      for (int col = 0; col < 11; col++) {
-        final inTopLeft = row < 4 && col < 4;
-        final inTopRight = row < 4 && col >= 7;
-        final inBottomLeft = row >= 7 && col < 4;
-        final inCenter = row >= 4 && row <= 6 && col >= 4 && col <= 6;
-        if (inTopLeft || inTopRight || inBottomLeft || inCenter) continue;
-        final val = (hashSeed + row * 17 + col * 29 + row * col * 7) % 5;
-        if (val == 0 || val == 2 || val == 4) {
-          rect(6 + col * 8.0, 6 + row * 8.0, 6, 6, 1, primary);
-        }
-      }
-    }
-
-    // Center logo
-    canvas.drawCircle(Offset(50 * scale, 50 * scale), 11 * scale, white);
-    canvas.drawCircle(Offset(50 * scale, 50 * scale), 8 * scale, primary);
-  }
-
-  @override
-  bool shouldRepaint(_DynamicQrPainter oldDelegate) => oldDelegate.token != token || oldDelegate.seed != seed;
-}

@@ -1,7 +1,7 @@
 name: doanvien_so
 description: "Doan Vien So - Dong Nai (Hackathon Round 1 MVP)"
 publish_to: "none"
-version: 2.8.2+9
+version: 2.8.3+10
 
 environment:
   sdk: ">=3.5.0 <4.0.0"
@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   http: ^1.6.0
   image_picker: ^1.1.2
+  mobile_scanner: ^7.5.0
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:

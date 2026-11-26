@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import '../state/app_state.dart';
 import '../ui.dart';
 
@@ -20,14 +21,36 @@ class _MemberScanQrScreenState extends State<MemberScanQrScreen> {
   bool simulateOutOfRange = false;
   Map<String, dynamic>? modalResult;
   Timer? _scanTimer;
+  MobileScannerController? _camera;
+  bool _handling = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _camera = MobileScannerController(
+      autoStart: true,
+      formats: const [BarcodeFormat.qrCode],
+      detectionTimeoutMs: 1200,
+    );
+  }
 
   @override
   void dispose() {
     _scanTimer?.cancel();
+    _camera?.dispose();
+    _camera = null;
     super.dispose();
   }
 
-  void handleSimulateScan() {
+  void _resumeCamera() {
+    try {
+      _camera?.start();
+    } catch (_) {}
+  }
+
+  /// Xử lý 1 lượt quét (từ camera thật hoặc nhập mã thủ công).
+  Future<void> _processScan(String scannedToken) async {
+    if (_handling || scanning || modalResult != null) return;
     final state = widget.state;
     final member = state.currentMember;
     final hasCheckedIn = state.scannedMemberIds.contains(member.id);
@@ -36,18 +59,26 @@ class _MemberScanQrScreenState extends State<MemberScanQrScreen> {
 
     setState(() => geoError = null);
 
+    if (scannedToken.trim() != state.activeSession.qrToken.trim()) {
+      setState(() => geoError = 'Mã QR không khớp buổi sinh hoạt hiện tại (${state.activeSession.qrToken}). Vui lòng quét đúng mã của Bí thư.');
+      return;
+    }
     if (hasCheckedIn || hasQueuedOffline) {
       setState(() => geoError = 'Bạn đã điểm danh buổi sinh hoạt này rồi. Hệ thống chặn điểm danh trùng lặp.');
       return;
     }
 
     setState(() => scanning = true);
+    try {
+      _camera?.stop();
+    } catch (_) {}
     _scanTimer?.cancel();
-    _scanTimer = Timer(const Duration(milliseconds: 900), () async {
+    _scanTimer = Timer(const Duration(milliseconds: 700), () async {
       if (!mounted) return;
       setState(() => scanning = false);
 
       if (state.activeSession.geofenceRequired && simulateOutOfRange) {
+        _resumeCamera();
         setState(() {
           geoError = 'Từ chối điểm danh: Vị trí hiện tại cách Nhà văn hóa KP5 ${distanceMeters}m (vượt bán kính 100m). Vui lòng di chuyển lại gần hoặc đăng ký sinh hoạt bù.';
         });
@@ -57,11 +88,49 @@ class _MemberScanQrScreenState extends State<MemberScanQrScreen> {
       final res = await state.recordMemberQRCheckIn(distanceMeters: distanceMeters);
       if (!mounted) return;
       if (res['ok'] != true) {
+        _resumeCamera();
         setState(() => geoError = (res['message'] as String?) ?? 'Bạn đã điểm danh buổi sinh hoạt này trước đó.');
         return;
       }
       setState(() => modalResult = res);
     });
+  }
+
+  void _onDetect(BarcodeCapture capture) {
+    for (final b in capture.barcodes) {
+      final raw = b.rawValue;
+      if (raw == null || raw.trim().isEmpty) continue;
+      _processScan(raw);
+      return;
+    }
+  }
+
+  /// Nhập mã thủ công — dự phòng khi camera lỗi/môi trường không có camera.
+  Future<void> _manualEntry() async {
+    final ctrl = TextEditingController();
+    final token = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Nhập mã điểm danh', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+        content: TextField(
+          controller: ctrl,
+          autofocus: true,
+          textCapitalization: TextCapitalization.characters,
+          decoration: const InputDecoration(
+            hintText: 'VD: KP5-202612-A7F9',
+            border: OutlineInputBorder(),
+            isDense: true,
+          ),
+          onSubmitted: (v) => Navigator.pop(ctx, v),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Hủy')),
+          FilledButton(onPressed: () => Navigator.pop(ctx, ctrl.text), child: const Text('Xác nhận')),
+        ],
+      ),
+    );
+    if (token == null || token.trim().isEmpty || !mounted) return;
+    await _processScan(token);
   }
 
   @override
@@ -185,111 +254,139 @@ class _MemberScanQrScreenState extends State<MemberScanQrScreen> {
         ),
       ],
       const SizedBox(height: 12),
-      // Camera viewport
+      // Camera thật
       Container(
-        height: 276,
-        padding: const EdgeInsets.all(16),
+        height: 320,
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: const Color(0xFF020617),
           borderRadius: BorderRadius.circular(24),
           boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 14)],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () => setState(() {
-                    simulateOutOfRange = !simulateOutOfRange;
-                    geoError = null;
-                  }),
-                  child: Container(
+            MobileScanner(
+              controller: _camera,
+              fit: BoxFit.cover,
+              onDetect: _onDetect,
+              errorBuilder: (context, error) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.videocam_off_rounded, size: 42, color: Colors.white38),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Không mở được camera\n(Hãy cấp quyền CAMERA trong Cài đặt)',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 12.5, color: Colors.white54, height: 1.5),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+            // Overlay tối mờ trên/dưới
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.black.withValues(alpha: 0.55), Colors.transparent, Colors.transparent, Colors.black.withValues(alpha: 0.55)],
+                  stops: const [0, 0.25, 0.75, 1],
+                ),
+              ),
+            ),
+            // Chip điều khiển trên cùng
+            Positioned(
+              top: 10, left: 12, right: 12,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => setState(() {
+                      simulateOutOfRange = !simulateOutOfRange;
+                      geoError = null;
+                    }),
+                    child: Container(
+                      height: 30,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: simulateOutOfRange ? const Color(0xFFDC2626) : Colors.white.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Row(children: [
+                        Icon(Icons.navigation_rounded, size: 12, color: simulateOutOfRange ? Colors.white : Colors.white70),
+                        const SizedBox(width: 5),
+                        Text(simulateOutOfRange ? 'Ngoài vùng (${distanceMeters}m)' : 'GPS OK (${distanceMeters}m)', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+                      ]),
+                    ),
+                  ),
+                  Container(
                     height: 30,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: simulateOutOfRange ? const Color(0xFFDC2626) : Colors.white.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Row(children: [
-                      Icon(Icons.navigation_rounded, size: 12, color: simulateOutOfRange ? Colors.white : Colors.white70),
-                      const SizedBox(width: 5),
-                      Text(simulateOutOfRange ? 'Ngoài vùng (${distanceMeters}m)' : 'GPS OK (${distanceMeters}m)', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(999)),
+                    child: const Row(children: [
+                      Icon(Icons.lock_rounded, size: 12, color: Color(0xFF34D399)),
+                      SizedBox(width: 5),
+                      Text('QR Động', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Colors.white70)),
                     ]),
                   ),
-                ),
-                Container(
-                  height: 30,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(999)),
-                  child: const Row(children: [
-                    Icon(Icons.lock_rounded, size: 12, color: Color(0xFF34D399)),
-                    SizedBox(width: 5),
-                    Text('QR Động', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Colors.white70)),
-                  ]),
-                ),
-              ],
-            ),
-            // Viewfinder
-            SizedBox(
-              width: 176,
-              height: 176,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white.withValues(alpha: 0.25)),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                  ),
-                  // 4 góc
-                  Positioned(top: 0, left: 0, child: _corner(size: 22, top: true, left: true)),
-                  Positioned(top: 0, right: 0, child: _corner(size: 22, top: true, left: false)),
-                  Positioned(bottom: 0, left: 0, child: _corner(size: 22, top: false, left: true)),
-                  Positioned(bottom: 0, right: 0, child: _corner(size: 22, top: false, left: false)),
-                  // Đường quét động
-                  if (!scanning)
-                    const _ScanLine(),
-                  if (scanning)
-                    Positioned.fill(
-                      child: Container(
-                        decoration: BoxDecoration(color: D.primary.withValues(alpha: 0.4), borderRadius: BorderRadius.circular(16)),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 26,
-                              height: 26,
-                              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
-                            ),
-                            SizedBox(height: 8),
-                            Text('Đang xác thực GPS...', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
-                          ],
-                        ),
-                      ),
-                    ),
                 ],
               ),
             ),
-            Text('Đưa mã QR của Bí thư vào khung (${state.activeSession.qrToken})', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
+            // Khung ngắm 4 góc
+            Center(
+              child: SizedBox(
+                width: 220,
+                height: 220,
+                child: Stack(
+                  children: [
+                    Positioned(top: 0, left: 0, child: _corner(size: 26, top: true, left: true)),
+                    Positioned(top: 0, right: 0, child: _corner(size: 26, top: true, left: false)),
+                    Positioned(bottom: 0, left: 0, child: _corner(size: 26, top: false, left: true)),
+                    Positioned(bottom: 0, right: 0, child: _corner(size: 26, top: false, left: false)),
+                  ],
+                ),
+              ),
+            ),
+            // Overlay đang xử lý
+            if (scanning)
+              Container(
+                color: D.primary.withValues(alpha: 0.45),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 30, height: 30, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)),
+                    SizedBox(height: 10),
+                    Text('Đã nhận mã — Đang xác thực GPS...', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
+                  ],
+                ),
+              ),
+            // Chú thích dưới
+            Positioned(
+              bottom: 10, left: 12, right: 12,
+              child: Text(
+                'Đưa mã QR của Bí thư vào khung — Token: ${state.activeSession.qrToken}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 12, color: Colors.white70),
+              ),
+            ),
           ],
         ),
       ),
       const SizedBox(height: 14),
-      PrimaryButton(
-        hasCheckedIn
-            ? 'Đã hoàn thành điểm danh'
-            : hasQueuedOffline
-                ? 'Đã lưu điểm danh ngoại tuyến'
-                : state.isOffline
-                    ? 'Quét QR (Lưu cục bộ)'
-                    : 'Quét mã QR Điểm danh ngay',
-        icon: Icons.photo_camera_rounded,
-        radius: 16,
-        onPressed: (scanning || hasCheckedIn || hasQueuedOffline) ? null : handleSimulateScan,
+      SecondaryButton(
+        'Nhập mã thủ công (dự phòng)',
+        icon: Icons.keyboard_rounded,
+        height: 44,
+        onPressed: (scanning || hasCheckedIn || hasQueuedOffline) ? null : _manualEntry,
       ),
       const SizedBox(height: 14),
       AppCard(
@@ -578,39 +675,3 @@ class _MemberScanQrScreenState extends State<MemberScanQrScreen> {
   }
 }
 
-/// Đường quét chạy qua lại trong viewfinder
-class _ScanLine extends StatefulWidget {
-  const _ScanLine();
-  @override
-  State<_ScanLine> createState() => _ScanLineState();
-}
-
-class _ScanLineState extends State<_ScanLine> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat(reverse: true);
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, _) {
-        return Positioned(
-          top: 8 + _controller.value * 148,
-          left: 8,
-          right: 8,
-          child: Container(
-            height: 2,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [Colors.transparent, const Color(0xFF93C5FD), Colors.transparent]),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
